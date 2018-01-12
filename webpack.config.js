@@ -9,8 +9,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].chunk.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: prod('/leaflet-ant-path/dist/') || dev('/dist/')
+    path: path.resolve(__dirname, 'dist')
   },
   devtool: 'source-map',
   resolve: {
