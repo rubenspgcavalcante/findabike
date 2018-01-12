@@ -1,3 +1,7 @@
+dist/
+karma/
+.idea
+
 # Logs
 logs
 *.log
