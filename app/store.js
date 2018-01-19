@@ -3,8 +3,9 @@ import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from './reducer';
+import { appBootstrapEpic } from "./modules/commons/epics/index";
 
-const rootEpic = combineEpics();
+const rootEpic = combineEpics(appBootstrapEpic);
 
 
 export default createStore(

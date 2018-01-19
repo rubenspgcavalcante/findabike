@@ -1,0 +1,11 @@
+$fa-font-path: "~font-awesome/fonts";
+
+@import "~font-awesome/scss/font-awesome";
+@import "~bulma/bulma.sass";
+
+@import "~modules/home/style/index";
+
+html, body {
+  height: 100%;
+  background: rgba(#4b25c5, 0.1);
+}

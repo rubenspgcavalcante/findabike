@@ -1,4 +1,4 @@
-export default function homeReducer(action, state) {
+export default function homeReducer(state={}, action) {
 
   return state;
 }

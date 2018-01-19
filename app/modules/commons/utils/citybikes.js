@@ -1,0 +1,1 @@
+export const cbAPI = (endpoint) => `https://api.citybik.es/v2/${endpoint}`;
