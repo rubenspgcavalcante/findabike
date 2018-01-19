@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
+import Suggestion from "./Suggestion";
 
 export default class Home extends Component {
-
-  componentWillMount() {
-
-  }
-
   render() {
+    const { networks = [], citySelected } = this.props;
+    const cities = networks.map(({ id, location: { city, country } }) => ({ id, name: city, country }));
+
     return (
-      <div className='home box'>
-        <div>
+      <div className='home'>
+        <div className="search-box">
           <h1 className="title">Find a Bike</h1>
           <div className='field'>
-            <div className="control has-icons-left">
-              <input className="input" placeholder="Choose your city"/>
-              <span className="icon is-small is-left"><i className="fa fa-search"/></span>
-            </div>
+            <Suggestion onSelection={(selection) => citySelected(selection)} cities={cities}/>
           </div>
         </div>
-        <div className="decoration"/>
+        <div className='decoration-box box'>
+          <div className="decoration"/>
+        </div>
       </div>
     );
   }

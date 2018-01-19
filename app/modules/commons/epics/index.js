@@ -24,9 +24,7 @@ export const appBootstrapEpic = action$ =>
         crossDomain: true
       }).map(({ response, status }) => {
           if (status <= 400) {
-            db.networks.bulkPut(response.networks)
-              .then(val => console.log(val))
-              .catch(err => console.log(err));
+            db.networks.bulkPut(response.networks);
             return appBootstrapFinished(response.networks);
           }
         }

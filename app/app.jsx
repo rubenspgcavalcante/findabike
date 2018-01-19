@@ -6,7 +6,7 @@ import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 import store from "./store";
 import "./app.scss";
-import Home from "./modules/home/components/Home";
+import Home from "./modules/home/containers/Home";
 import { appBootstrap } from "./modules/commons/epics/index";
 
 if ('serviceWorker' in navigator) {

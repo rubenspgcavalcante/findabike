@@ -23,6 +23,7 @@
     "polyline-encoded": "^0.0.8",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
+    "react-autosuggest": "^9.3.2",
     "react-color": "^2.13.5",
     "react-dom": "^16.2.0",
     "react-leaflet": "^1.4.0",

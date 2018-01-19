@@ -1,0 +1,11 @@
+.suggestion-container {
+  z-index: 9999;
+  position: relative;
+
+  .suggestion {
+    &:hover {
+      background-color: rgba(#4b25c5, 0.1);
+      color: #000;
+    }
+  }
+}

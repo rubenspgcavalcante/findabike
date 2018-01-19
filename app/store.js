@@ -4,8 +4,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from './reducer';
 import { appBootstrapEpic } from "./modules/commons/epics/index";
+import { citySelectedEpic } from "./modules/home/epics/index";
 
-const rootEpic = combineEpics(appBootstrapEpic);
+const rootEpic = combineEpics(appBootstrapEpic, citySelectedEpic);
 
 
 export default createStore(
