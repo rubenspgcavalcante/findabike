@@ -26,48 +26,37 @@ const renderSuggestion = city => (
   </div>
 );
 
-const renderInput = inputProps => (
-  <div>
-    <input className="input" placeholder="Choose your city" {...inputProps} />
-    <span className="icon is-small is-left"><i className="fa fa-search"/></span>
-  </div>
+const renderInput = ({ loading, ...inputProps }) => (
+  loading ?
+    <div>
+      <input className="input is-disabled" type="text" {...inputProps} disabled={true}/>
+      <span className="icon is-small is-left"><i className="fa fa-spinner fa-spin"/></span>
+    </div> :
+    <div>
+      <input className="input" {...inputProps} />
+      <span className="icon is-small is-left"><i className="fa fa-search"/></span>
+    </div>
 );
 
 export default class Suggestion extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: '',
-      suggestions: []
-    };
-  }
-
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
-  };
-
   onSuggestionsFetchRequested = ({ value }) => {
-    const { cities } = this.props;
-    this.setState({
-      suggestions: getSuggestions(cities, value)
-    });
+    const { cities, onSuggestionsChange } = this.props;
+    onSuggestionsChange(getSuggestions(cities, value));
   };
 
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
+    const { onSuggestionsChange } = this.props;
+    onSuggestionsChange([]);
   };
 
   render() {
-    const { onSelection } = this.props;
-    const { value, suggestions } = this.state;
+    const { search, loading, suggestions, onSelection, onChange } = this.props;
 
     const inputProps = {
-      value,
-      onChange: this.onChange
+      value: search,
+      loading,
+      placeholder: "Choose your city",
+      onChange: (ev, { newValue }) => onChange(newValue)
     };
 
     return (

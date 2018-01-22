@@ -3,10 +3,10 @@ import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from './reducer';
-import { appBootstrapEpic } from "./modules/commons/epics/index";
-import { citySelectedEpic } from "./modules/home/epics/index";
+import { loadLocationEpic, loadNetworksEpic, loadPlaceEpic } from "./modules/commons/epics/index";
+import { autoSelectCityEpic, citySelectedEpic } from "./modules/home/epics/index";
 
-const rootEpic = combineEpics(appBootstrapEpic, citySelectedEpic);
+const rootEpic = combineEpics(loadNetworksEpic, loadLocationEpic, loadPlaceEpic, citySelectedEpic, autoSelectCityEpic);
 
 
 export default createStore(
