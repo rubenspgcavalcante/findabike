@@ -20,17 +20,18 @@ const App = () =>
     <div id="react-app" className="container is-fluid">
       <div className="section">
         <Home/>
-      </div>
-      <footer className="section">
-        <div className="box is-small">
-          <span>Powered by:</span>
-          <div className='credits-box'>
-            <a href="https://www.openstreetmap.org" target='_blank'>Open Street Map</a>&
-            <a href="https://api.citybik.es/v2/" target='_blank'>CityBikes</a>&
-            <a href="https://surge.sh/" target='_blank'>Surge</a>
+
+        <footer>
+          <div className="box is-small">
+            <span>Powered by:</span>
+            <div className='credits-box'>
+              <a href="https://www.openstreetmap.org" target='_blank'>Open Street Map</a>&
+              <a href="https://api.citybik.es/v2/" target='_blank'>CityBikes</a>&
+              <a href="https://surge.sh/" target='_blank'>Surge</a>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   </Router>;
 
