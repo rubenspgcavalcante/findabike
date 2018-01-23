@@ -2,10 +2,35 @@
   z-index: 9999;
   position: relative;
 
+  .box {
+    padding: 0;
+
+    li[role="option"] {
+      border-bottom: 1px solid #E8E8E8;
+
+      &:last-child {
+        border: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(#4b25c5, 0.1);
+        color: #000;
+      }
+    }
+  }
+
   .suggestion {
-    &:hover {
-      background-color: rgba(#4b25c5, 0.1);
-      color: #000;
+    padding: 1rem;
+
+    .company {
+      float: right;
+      font-size: 0.7rem;
+      margin-top: 0.3rem;
+    }
+
+    hr {
+      margin: 0.5rem 0;
     }
   }
 }

@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "build": "NODE_ENV=production webpack --progress",
-    "server": "NODE_ENV=development webpack-dev-server --https --content-base dist/ --hot --inline --compress --colors --history-api-fallback",
+    "server": "NODE_ENV=development webpack-dev-server --content-base dist/ --hot --inline --compress --colors --history-api-fallback",
     "surge-publish": "surge ./dist/ findabike.surge.sh"
   },
   "dependencies": {

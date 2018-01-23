@@ -8,7 +8,13 @@ export default class Home extends Component {
       networks = [], network, search, searchLock, suggestions, location, place, citySelected, searchChange, suggestionsChange
     } = this.props;
 
-    const cities = networks.map(({ id, location: { city, country } }) => ({ id, name: city, country }));
+    const places = networks.map(({ id, company, location: { city, country } }) => ({
+      id,
+      name,
+      city,
+      country,
+      company: company && company[0]
+    }));
 
     return (
       <div className='home'>
@@ -19,7 +25,7 @@ export default class Home extends Component {
               <Suggestion search={search} suggestions={suggestions} onChange={searchChange}
                           onSuggestionsChange={suggestionsChange}
                           onSelection={(selection) => citySelected(selection)}
-                          cities={cities} loading={searchLock}/>
+                          places={places} loading={searchLock}/>
             </div>
           </div>
           <div className='decoration-box box'>

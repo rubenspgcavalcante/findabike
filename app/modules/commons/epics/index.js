@@ -1,5 +1,4 @@
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/bindCallback";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -32,34 +31,30 @@ export const autoSearchLock = (lock = true) => ({ type: AUTO_SEARCH_LOCK, payloa
 
 export const setPersitentStorage = (enabled = false) => ({ type: PERSISTENT_STORAGE, payload: enabled });
 
-const getLocation$ = Observable.bindCallback(handler => {
+const getLocation$ = Observable.create(observer => {
   if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(handler);
+    navigator.geolocation.getCurrentPosition(coords => {
+      observer.next(coords);
+      observer.complete();
+    }, error => {
+      observer.error(error);
+    });
   }
   else {
-    handler(null);
+    observer.error({ message: 'Geolocation API not available' });
   }
-})();
+});
 
 export const loadLocationEpic = action$ =>
   Observable.concat(
     Observable.of(autoSearchLock(true)),
     action$.ofType(APP_BOOTSTRAP)
       .mergeMap(action =>
-        getLocation$.map(res => {
-          if (res === null) {
-            console.warn('Geolocation API not available in this device');
-            return autoSearchLock(false);
-          }
-          else if (res.hasOwnProperty('code')) {
-            console.warn(`[ERROR ${res.code}: ${res.message}`);
-            return autoSearchLock(false);
-          }
-          else {
-            const { latitude, longitude } = res.coords;
+        getLocation$.mergeMap(
+          ({ coords: { latitude, longitude } }) => {
             return locationLoaded({ latitude, longitude });
           }
-        })
+        ).catch(err => Observable.of(autoSearchLock(false)))
       ));
 
 export const loadPlaceEpic = action$ =>

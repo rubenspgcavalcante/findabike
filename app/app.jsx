@@ -13,15 +13,15 @@ if ('serviceWorker' in navigator) {
   runtime.register();
 }
 
-store.dispatch(appBootstrap());
+document.addEventListener('DOMContentLoaded', () => store.dispatch(appBootstrap()), false);
 
 const App = () =>
   <Router>
-    <div id="react-app" className="container is-fluid">
+    <main id="react-app" className="container is-fluid">
       <div className="section">
         <Home/>
 
-        <footer>
+        <footer role="footer">
           <div className="box is-small">
             <span>Powered by:</span>
             <div className='credits-box'>
@@ -32,7 +32,7 @@ const App = () =>
           </div>
         </footer>
       </div>
-    </div>
+    </main>
   </Router>;
 
 render(

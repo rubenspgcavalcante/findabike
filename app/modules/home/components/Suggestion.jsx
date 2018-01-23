@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 
-const getSuggestions = (cities, value) => {
+const getSuggestions = (places, value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  return inputLength === 0 ? [] : cities.filter(city =>
-    city.name.toLowerCase().slice(0, inputLength) === inputValue
+  return inputLength === 0 ? [] : places.filter(place =>
+    place.city.toLowerCase().slice(0, inputLength) === inputValue
   ).slice(0, 4);
 };
 
@@ -20,28 +20,29 @@ const renderSuggestionsContainer = ({ containerProps, children }) => {
   );
 };
 
-const renderSuggestion = city => (
+const renderSuggestion = place => (
   <div className="suggestion">
-    {city.name} - {city.country}
+    {place.city} - {place.country}
+    <span className="company">({place.company})</span>
   </div>
 );
 
 const renderInput = ({ loading, ...inputProps }) => (
   loading ?
     <div>
-      <input className="input is-disabled" type="text" {...inputProps} disabled={true}/>
+      <input className="input is-disabled" aria-disabled="true" type="text" {...inputProps} disabled={true}/>
       <span className="icon is-small is-left"><i className="fa fa-spinner fa-spin"/></span>
     </div> :
     <div>
-      <input className="input" {...inputProps} />
+      <input className="input" {...inputProps} aria-disabled="false" type="text"/>
       <span className="icon is-small is-left"><i className="fa fa-search"/></span>
     </div>
 );
 
 export default class Suggestion extends Component {
   onSuggestionsFetchRequested = ({ value }) => {
-    const { cities, onSuggestionsChange } = this.props;
-    onSuggestionsChange(getSuggestions(cities, value));
+    const { places, onSuggestionsChange } = this.props;
+    onSuggestionsChange(getSuggestions(places, value));
   };
 
   onSuggestionsClearRequested = () => {

@@ -11,9 +11,7 @@ self.addEventListener('install', ev => {
 
   ev.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(assetsToCache);
-      })
+      .then(cache => cache.addAll(assetsToCache))
       .then(() => console.debug('[SW] Cached assets', assetsToCache))
       .catch((error) => {
         console.error(error);

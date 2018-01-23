@@ -57,15 +57,15 @@ export default class StationsMap extends Component {
     const { latitude, longitude } = currentLocation || location;
 
     const latLngs = stations ? stations.map(({ latitude, longitude }) => latLng(latitude, longitude)) : null;
-    const userLatLng = latLng(latitude, longitude);
+    const centerLatLng = latLng(latitude, longitude);
 
     return (
-      <Map center={userLatLng} bounds={latLngs} zoom={13}>
+      <Map center={centerLatLng} bounds={latLngs} zoom={13}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url={openStreetMapsLayer}
         />
-        <Marker position={userLatLng} icon={userIcon}/>
+        {currentLocation ? <Marker position={centerLatLng} icon={userIcon}/> : null}
 
         {stations ?
           <MarkerCluster>
