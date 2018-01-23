@@ -19,6 +19,8 @@ export const LOCATION_LOADED = 'LOCATION_LOADED';
 export const PLACE_LOADED = 'PLACE_LOADED';
 export const AUTO_SEARCH_LOCK = 'AUTO_SEARCH_LOCK';
 
+export const PERSISTENT_STORAGE = 'PERSISTENT_STORAGE';
+
 export const appBootstrap = () => ({ type: APP_BOOTSTRAP });
 export const networksLoaded = (payload) => ({ type: NETWORKS_LOADED, payload });
 
@@ -27,6 +29,8 @@ export const locationLoaded = (payload) => ({ type: LOCATION_LOADED, payload });
 export const placeLoaded = (payload) => ({ type: PLACE_LOADED, payload });
 
 export const autoSearchLock = (lock = true) => ({ type: AUTO_SEARCH_LOCK, payload: lock });
+
+export const setPersitentStorage = (enabled = false) => ({ type: PERSISTENT_STORAGE, payload: enabled });
 
 const getLocation$ = Observable.bindCallback(handler => {
   if ("geolocation" in navigator) {
@@ -97,3 +101,10 @@ export const loadNetworksEpic = action$ =>
         )
       )
     );
+
+export const setPersistentStorageEpic = action$ =>
+  action$.ofType(APP_BOOTSTRAP)
+    .mergeMap(action => {
+      if (navigator.storage && navigator.storage.persist)
+        return Observable.fromPromise(navigator.storage.persist().then(setPersitentStorage));
+    });

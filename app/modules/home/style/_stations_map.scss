@@ -1,0 +1,24 @@
+.map-container {
+  height: 27rem;
+  margin-top: 1rem;
+
+  @include mobile {
+    height: 30rem;
+    margin-top: 0.5rem;
+  }
+
+  .leaflet-container {
+    height: 100%;
+  }
+
+  .leaflet-popup-content {
+    .station-property {
+      display: block;
+
+      .popup-label {
+        margin-right: 0.2rem;
+      }
+
+    }
+  }
+}

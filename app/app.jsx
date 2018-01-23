@@ -7,10 +7,10 @@ import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import store from "./store";
 import "./app.scss";
 import Home from "./modules/home/containers/Home";
-import { appBootstrap } from "./modules/commons/epics/index";
+import { appBootstrap } from "./modules/commons/epics";
 
 if ('serviceWorker' in navigator) {
-  const registration = runtime.register();
+  runtime.register();
 }
 
 store.dispatch(appBootstrap());
@@ -21,6 +21,16 @@ const App = () =>
       <div className="section">
         <Home/>
       </div>
+      <footer className="section">
+        <div className="box is-small">
+          <span>Powered by:</span>
+          <div className='credits-box'>
+            <a href="https://www.openstreetmap.org" target='_blank'>Open Street Map</a>&
+            <a href="https://api.citybik.es/v2/" target='_blank'>CityBikes</a>&
+            <a href="https://surge.sh/" target='_blank'>Surge</a>
+          </div>
+        </div>
+      </footer>
     </div>
   </Router>;
 

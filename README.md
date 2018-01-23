@@ -18,3 +18,4 @@ This project is under the [MIT license](https://opensource.org/licenses/MIT)
 Under the Creative Commons license:
 - [Purple Triangle Mosaic Background](https://pixabay.com/en/purple-triangle-purple-background-2484167/) by [DavidZydd](https://pixabay.com/en/users/DavidZydd-985081/)
 - [Maps and transport](https://www.flaticon.com/packs/maps-and-transport) by [Google](https://www.flaticon.com/authors/google)
+- [Simpleicon Places](https://www.flaticon.com/packs/simpleicon-places) by [SimpleIcon](https://www.flaticon.com/authors/simpleicon)

@@ -2,10 +2,29 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import "~font-awesome/scss/font-awesome";
 @import "~bulma/bulma.sass";
+@import url("~leaflet/dist/leaflet.css");
+@import url("~react-leaflet-markercluster/dist/styles.min.css");
 
 @import "~modules/home/style/index";
 
-html, body {
+html {
   height: 100%;
   background: rgba(#4b25c5, 0.1);
+}
+
+.container {
+  .section {
+    @include mobile {
+      padding: 0.5rem;
+    }
+  }
+}
+
+footer {
+  a {
+    &:first-child {
+      margin-left: 0;
+    }
+    margin: 0 0.5rem;
+  }
 }
