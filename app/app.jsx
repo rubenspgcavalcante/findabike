@@ -8,6 +8,7 @@ import store from "./store";
 import "./app.scss";
 import Home from "./modules/home/containers/Home";
 import { appBootstrap } from "./modules/commons/epics";
+import Modal from "./modules/commons/containers/Modal";
 
 if ('serviceWorker' in navigator) {
   runtime.register();
@@ -15,9 +16,11 @@ if ('serviceWorker' in navigator) {
 
 document.addEventListener('DOMContentLoaded', () => store.dispatch(appBootstrap()), false);
 
+
 const App = () =>
   <Router>
     <main id="react-app" className="container is-fluid">
+      <Modal/>
       <div className="section">
         <Home/>
 

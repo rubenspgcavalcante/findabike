@@ -29,7 +29,7 @@ export const placeLoaded = (payload) => ({ type: PLACE_LOADED, payload });
 
 export const autoSearchLock = (lock = true) => ({ type: AUTO_SEARCH_LOCK, payload: lock });
 
-export const setPersitentStorage = (enabled = false) => ({ type: PERSISTENT_STORAGE, payload: enabled });
+export const setPersistentStorage = (enabled = false) => ({ type: PERSISTENT_STORAGE, payload: enabled });
 
 const getLocation$ = Observable.create(observer => {
   if ("geolocation" in navigator) {
@@ -51,10 +51,11 @@ export const loadLocationEpic = action$ =>
     action$.ofType(APP_BOOTSTRAP)
       .mergeMap(action =>
         getLocation$.mergeMap(
-          ({ coords: { latitude, longitude } }) => {
-            return locationLoaded({ latitude, longitude });
-          }
-        ).catch(err => Observable.of(autoSearchLock(false)))
+          ({ coords: { latitude, longitude } }) => Observable.of(locationLoaded({ latitude, longitude })))
+          .catch(err => {
+            console.warn(err);
+            return Observable.of(autoSearchLock(false))
+          })
       ));
 
 export const loadPlaceEpic = action$ =>
@@ -101,5 +102,5 @@ export const setPersistentStorageEpic = action$ =>
   action$.ofType(APP_BOOTSTRAP)
     .mergeMap(action => {
       if (navigator.storage && navigator.storage.persist)
-        return Observable.fromPromise(navigator.storage.persist().then(setPersitentStorage));
+        return Observable.fromPromise(navigator.storage.persist().then(setPersistentStorage));
     });

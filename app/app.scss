@@ -17,16 +17,20 @@ html {
     @include mobile {
       padding: 0.5rem;
     }
+
+    footer {
+      margin-top: 0.5rem;
+
+      a {
+        &:first-child {
+          margin-left: 0;
+        }
+        margin: 0 0.5rem;
+      }
+    }
   }
 }
 
-footer {
-  margin-top: 0.5rem;
-
-  a {
-    &:first-child {
-      margin-left: 0;
-    }
-    margin: 0 0.5rem;
-  }
+.modal {
+  z-index: 2;
 }

@@ -12,6 +12,7 @@ import "rxjs/add/observable/dom/ajax";
 import { cbAPI } from "../../commons/utils/APIs";
 import db from "../../commons/cache/db";
 import { autoSearchLock, NETWORKS_LOADED, PLACE_LOADED } from "../../commons/epics/index";
+import { openModal } from "../../commons/epics/modal";
 
 export const CITY_SELECTED = 'CITY_SELECTED';
 export const STATIONS_LOADED = 'STATIONS_LOADED';
@@ -24,6 +25,13 @@ export const stationsLoaded = (network) => ({ type: STATIONS_LOADED, payload: ne
 
 export const searchChange = (search) => ({ type: SEARCH_CHANGE, payload: search });
 export const suggestionsChange = (suggestions) => ({ type: SUGGESTIONS_CHANGE, payload: suggestions });
+
+const autoSearchLockOff$ = Observable.of(autoSearchLock(false));
+const autoSelect$ = (network) => Observable.concat(
+  autoSearchLockOff$,
+  Observable.of(citySelected(network.id)),
+  Observable.of(searchChange(network.location.city))
+);
 
 export const autoSelectCityEpic = action$ =>
   action$
@@ -41,17 +49,17 @@ export const autoSelectCityEpic = action$ =>
     }, { networks: null, place: null })
     .mergeMap(({ networks, place }) => {
       if (networks !== null && place !== null) {
-        const autoSearchLockOff$ = Observable.of(autoSearchLock(false));
-        const network = networks.find(({ location }) => location.city === place.address.state);
-
-        if (network) {
-          return Observable.concat(
-            autoSearchLockOff$,
-            Observable.of(citySelected(network.id)),
-            Observable.of(searchChange(network.location.city))
-          )
+        const matched = networks.filter(({ location }) => location.city === place.address.state);
+        if (matched.length === 1) {
+          return autoSelect$(matched[0]);
         }
-
+        else if (matched.length > 1) {
+          return Observable.of(openModal({
+            title: 'Choose a provider',
+            type: 'ChooseProvider',
+            content: matched
+          }))
+        }
         return autoSearchLockOff$;
       }
 
