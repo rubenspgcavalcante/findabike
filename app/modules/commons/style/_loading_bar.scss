@@ -1,0 +1,36 @@
+@import "vars";
+
+@keyframes loading-progress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes loading-color {
+  from {
+    background: $theme-color;
+  }
+
+  to {
+    background: darken($background, 10%);
+  }
+}
+
+.loading-bar {
+  height: 0.2rem;
+
+  .loading {
+    height: 100%;
+    width: 0;
+    margin: auto;
+
+    &.active {
+      animation: loading-progress 2s linear, loading-color 2s ease-in;
+      animation-iteration-count: infinite;
+    }
+  }
+}

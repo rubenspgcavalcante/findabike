@@ -4,12 +4,12 @@ $fa-font-path: "~font-awesome/fonts";
 @import "~bulma/bulma.sass";
 @import url("~leaflet/dist/leaflet.css");
 @import url("~react-leaflet-markercluster/dist/styles.min.css");
-
-@import "~modules/home/style/index";
+@import "modules/commons/style/index";
+@import "modules/home/style/index";
 
 html {
   height: 100%;
-  background: rgba(#4b25c5, 0.1);
+  background: $background;
 }
 
 .container {
@@ -32,5 +32,5 @@ html {
 }
 
 .modal {
-  z-index: 2;
+  z-index: $leaflet-z-index + 2;
 }

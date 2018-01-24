@@ -1,7 +1,9 @@
+@import "~modules/commons/style/_vars";
+
 .home {
   .search-box {
     position: absolute;
-    z-index: 1;
+    z-index: $leaflet-z-index + 1;
     width: 100%;
     padding: 2rem 3rem 1rem 0;
 

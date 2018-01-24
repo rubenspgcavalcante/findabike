@@ -1,6 +1,13 @@
+@import "modules/commons/style/vars";
+
 .suggestion-container {
-  z-index: 9999;
   position: relative;
+
+  $active-color: lighten($theme-color, 40%);
+
+  .is-active {
+    background-color: $active-color;
+  }
 
   .box {
     padding: 0;
@@ -14,7 +21,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: rgba(#4b25c5, 0.1);
+        background-color: $active-color;
         color: #000;
       }
     }

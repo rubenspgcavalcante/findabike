@@ -7,7 +7,7 @@ const mapStateToProps = ({ app: { networks, location, place }, home: { search, s
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  citySelected: (id) => dispatch(citySelected(id)),
+  citySelected: (network) => dispatch(citySelected(network)),
   searchChange: (search) => dispatch(searchChange(search)),
   suggestionsChange: (suggestions) => dispatch(suggestionsChange(suggestions))
 });

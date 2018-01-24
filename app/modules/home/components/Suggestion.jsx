@@ -50,6 +50,25 @@ export default class Suggestion extends Component {
     onSuggestionsChange([]);
   };
 
+  onSuggestionHighlighted({ suggestion }) {
+    suggestion && this.props.onChange(suggestion.city);
+  }
+
+  _renderInput({ loading, ...inputProps }) {
+    return (
+      loading ?
+        <div>
+          <input className="input is-disabled" aria-disabled="true"
+                 type="text" {...inputProps} disabled={true}/>
+          <span className="icon is-small is-left"><i className="fa fa-spinner fa-spin"/></span>
+        </div> :
+        <div>
+          <input className="input" {...inputProps} aria-disabled="false" type="text"/>
+          <span className="icon is-small is-left"><i className="fa fa-search"/></span>
+        </div>
+    )
+  };
+
   render() {
     const { search, loading, suggestions, onSelection, onChange } = this.props;
 
@@ -62,16 +81,18 @@ export default class Suggestion extends Component {
 
     return (
       <Autosuggest
-        onSuggestionSelected={(event, { suggestion }) => onSelection(suggestion.id)}
+        focusInputOnSuggestionClick={false}
+        onSuggestionSelected={(event, { suggestion }) => onSelection(suggestion)}
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionHighlighted={this.onSuggestionHighlighted.bind(this)}
         getSuggestionValue={getSuggestionValue}
         renderSuggestionsContainer={renderSuggestionsContainer}
         renderSuggestion={renderSuggestion}
-        renderInputComponent={renderInput}
+        renderInputComponent={this._renderInput.bind(this)}
         inputProps={inputProps}
-        theme={{ container: "control has-icons-left" }}
+        theme={{ container: "control has-icons-left", suggestionHighlighted: "is-active" }}
       />
     )
   }
