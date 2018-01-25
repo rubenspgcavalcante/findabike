@@ -35,6 +35,7 @@ class ChooseProvider extends Component {
 
   render() {
     const { title, content } = this.props;
+    const { chosenCity } = this.state;
 
     return (
       <div>
@@ -53,7 +54,7 @@ class ChooseProvider extends Component {
           </div>
         </section>
         <footer className="modal-card-foot">
-          <button className="button is-success" onClick={this._select.bind(this)}>Select</button>
+          <button disabled={!chosenCity} className="button is-success" onClick={this._select.bind(this)}>Select</button>
           <button className="button" onClick={this._close.bind(this)}>Cancel</button>
         </footer>
       </div>

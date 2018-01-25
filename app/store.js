@@ -4,9 +4,23 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import reducer from './reducer';
 import { autoSelectCityEpic, citySelectedEpic } from "./modules/home/epics";
-import { loadLocationEpic, loadNetworksEpic, loadPlaceEpic, setPersistentStorageEpic } from "./modules/commons/epics";
+import {
+  loadLocationEpic,
+  loadNetworksEpic,
+  loadPlaceEpic,
+  setPersistentStorageEpic,
+  updateLocationEpic
+} from "./modules/commons/epics";
 
-const rootEpic = combineEpics(setPersistentStorageEpic, loadNetworksEpic, loadLocationEpic, loadPlaceEpic, citySelectedEpic, autoSelectCityEpic);
+const rootEpic = combineEpics(
+  setPersistentStorageEpic,
+  loadNetworksEpic,
+  loadLocationEpic,
+  updateLocationEpic,
+  loadPlaceEpic,
+  citySelectedEpic,
+  autoSelectCityEpic
+);
 
 export default createStore(
   reducer,

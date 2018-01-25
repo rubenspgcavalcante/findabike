@@ -5,7 +5,7 @@ import StationsMap from "./StationsMap";
 export default class Home extends Component {
   render() {
     const {
-      networks = [], network, search, searchLock, suggestions, location, place, citySelected, searchChange, suggestionsChange
+      networks = [], network, search, searchLock, suggestions, location, mapCenter, citySelected, searchChange, suggestionsChange
     } = this.props;
 
     const places = networks.map(({ id, company, location: { city, country } }) => ({
@@ -33,7 +33,7 @@ export default class Home extends Component {
           </div>
         </div>
         {network ? <div className="map-container box">
-          <StationsMap currentLocation={location} network={network}/>
+          <StationsMap center={mapCenter} currentLocation={location} network={network}/>
         </div> : null}
       </div>
     );

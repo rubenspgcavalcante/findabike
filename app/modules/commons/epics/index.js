@@ -2,6 +2,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
+import "rxjs/add/operator/take";
 import "rxjs/add/observable/concat";
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/fromPromise";
@@ -17,6 +18,7 @@ export const APP_BOOTSTRAP = 'APP_START';
 export const NETWORKS_LOADED = 'NETWORKS_LOADED';
 
 export const LOCATION_LOADED = 'LOCATION_LOADED';
+export const LOCATION_UPDATED = 'LOCATION_UPDATED';
 
 export const PLACE_LOADED = 'PLACE_LOADED';
 export const SEARCH_LOCK = 'SEARCH_LOCK';
@@ -29,6 +31,7 @@ export const appBootstrap = () => ({ type: APP_BOOTSTRAP });
 export const networksLoaded = (payload) => ({ type: NETWORKS_LOADED, payload });
 
 export const locationLoaded = (payload) => ({ type: LOCATION_LOADED, payload });
+export const locationUpdated = (payload) => ({ type: LOCATION_UPDATED, payload });
 
 export const placeLoaded = (payload) => ({ type: PLACE_LOADED, payload });
 
@@ -36,11 +39,10 @@ export const searchLock = (lock = true) => ({ type: SEARCH_LOCK, payload: lock }
 
 export const setPersistentStorage = (enabled = false) => ({ type: PERSISTENT_STORAGE, payload: enabled });
 
-const getLocation$ = Observable.create(observer => {
+const locationWatcher$ = Observable.create(observer => {
   if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(coords => {
-      observer.next(coords);
-      observer.complete();
+    navigator.geolocation.watchPosition(position => {
+      observer.next(position);
     }, error => {
       observer.error(error);
     });
@@ -55,13 +57,22 @@ export const loadLocationEpic = action$ =>
     Observable.of(searchLock(true)),
     action$.ofType(APP_BOOTSTRAP)
       .mergeMap(action =>
-        getLocation$.mergeMap(
-          ({ coords: { latitude, longitude } }) => Observable.of(locationLoaded({ latitude, longitude })))
+        locationWatcher$
+          .take(1)
+          .mergeMap(
+            ({ coords: { latitude, longitude } }) => Observable.of(locationLoaded({ latitude, longitude })))
           .catch(err => {
             console.warn(err);
             return Observable.of(searchLock(false))
           })
       ));
+
+export const updateLocationEpic = action$ =>
+  action$.ofType(LOCATION_LOADED)
+    .mergeMap(() =>
+      locationWatcher$.mergeMap(
+        ({ coords: { latitude, longitude } }) => Observable.of(locationUpdated({ latitude, longitude })))
+    );
 
 export const loadPlaceEpic = action$ =>
   action$.ofType(LOCATION_LOADED)
@@ -94,7 +105,7 @@ export const loadNetworksEpic = action$ =>
           crossDomain: true
         }).map(({ response, status }) => {
             if (status <= 400) {
-              db.networks.bulkPut(response.networks);
+              db.transaction('rw', db.networks, () => db.networks.bulkPut(response.networks));
               return networksLoaded(response.networks);
             }
           }

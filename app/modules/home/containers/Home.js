@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import Home from "../components/Home";
 import { citySelected, searchChange, suggestionsChange } from "../epics/index";
 
-const mapStateToProps = ({ app: { networks, location, place }, home: { search, suggestions, searchLock, network } }) => ({
-  networks, location, place, search, suggestions, searchLock, network
+const mapStateToProps = ({ app: { networks, location, mapCenter, place }, home: { search, suggestions, searchLock, network } }) => ({
+  networks, location, mapCenter, place, search, suggestions, searchLock, network
 });
 
 const mapDispatchToProps = (dispatch) => ({
