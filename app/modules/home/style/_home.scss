@@ -1,6 +1,10 @@
 @import "~modules/commons/style/_vars";
 
 .home {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
   .search-box {
     position: absolute;
     z-index: $leaflet-z-index + 1;

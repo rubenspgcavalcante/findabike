@@ -1,14 +1,12 @@
-.map-container {
-  height: 27rem;
-  margin-top: 1rem;
+@import "modules/commons/style/vars";
 
-  @include mobile {
-    height: 30rem;
-    margin-top: 0.5rem;
-  }
+.map-container {
+  flex-grow: 1;
+  display: flex;
+  margin-top: 0.5rem;
 
   .leaflet-container {
-    height: 100%;
+    flex-grow: 1;
   }
 
   .leaflet-popup-content {
@@ -21,4 +19,34 @@
 
     }
   }
+
+  .marker-cluster {
+    span {
+      color: #fff;
+      text-shadow: 0 0 1px #666;
+      font-weight: bold;
+    }
+
+    &-small {
+      $small: lighten($theme-color, 40%);
+      background: rgba($small, 0.4);
+      div {
+        background: $small;
+      }
+    }
+    &-medium {
+      $medium: lighten($theme-color, 20%);
+      background: rgba($medium, 0.4);
+      div {
+        background: $medium;
+      }
+    }
+    &-large {
+      background: rgba($theme-color, 0.4);
+      div {
+        background: $theme-color;
+      }
+    }
+  }
+
 }

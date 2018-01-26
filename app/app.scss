@@ -7,13 +7,22 @@ $fa-font-path: "~font-awesome/fonts";
 @import "modules/commons/style/index";
 @import "modules/home/style/index";
 
-html {
+html, body {
   height: 100%;
   background: $background;
+  overflow: hidden;
+}
+
+#app, #react-app {
+  height: 100%;
 }
 
 .container {
   .section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     @include mobile {
       padding: 0.5rem;
     }

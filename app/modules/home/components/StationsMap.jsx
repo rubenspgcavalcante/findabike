@@ -4,21 +4,21 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { icon, latLng } from "leaflet";
 import MarkerCluster from "react-leaflet-markercluster";
 
-import station from "assets/map/map-marker.svg";
-import user from "assets/map/map-marker-with-a-person-shape.svg";
+import station from "assets/map/map-marker.png";
+import user from "assets/map/map-marker-with-a-person-shape.png";
 import { googleDirections, openStreetMapsLayer } from "../../commons/utils/APIs";
 
 const stationIcon = icon({
   iconUrl: station,
-  iconSize: [32, 48],
-  iconAnchor: [16, 48],
-  popupAnchor: [0, -40]
+  iconSize: [24, 32],
+  iconAnchor: [12, 32],
+  popupAnchor: [0, -30]
 });
 
 const userIcon = icon({
   iconUrl: user,
-  iconSize: [32, 48],
-  iconAnchor: [16, 48],
+  iconSize: [32, 32],
+  iconAnchor: [32, 64],
   popupAnchor: [0, -40]
 });
 
