@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Suggestion from "./Suggestion";
-import StationsMap from "./StationsMap";
+import StationsMap from "../containers/StationsMap";
 
 export default class Home extends Component {
   render() {
     const {
-      networks = [], network, search, searchLock, suggestions, location, mapCenter, citySelected, searchChange, suggestionsChange
+      networks = [], search, searchLock, suggestions, citySelected, searchChange, suggestionsChange
     } = this.props;
 
-    const places = networks.map(({ id, company, location: { city, country } }) => ({
+    const places = networks.map(({ id, company, location }) => ({
       id,
       name,
-      city,
-      country,
+      city: location ? location.city : null,
+      country: location ? location.country : null,
       company: company && company[0]
     }));
 
@@ -32,9 +32,7 @@ export default class Home extends Component {
             <div className="decoration"/>
           </div>
         </div>
-        {network ? <div className="map-container box">
-          <StationsMap center={mapCenter} currentLocation={location} network={network}/>
-        </div> : null}
+        <StationsMap/>
       </div>
     );
   }

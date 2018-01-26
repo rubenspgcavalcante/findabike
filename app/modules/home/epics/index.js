@@ -20,8 +20,11 @@ export const STATIONS_LOADED = 'STATIONS_LOADED';
 export const SEARCH_CHANGE = 'SEARCH_CHANGE';
 export const SUGGESTIONS_CHANGE = 'SUGGESTIONS_CHANGE';
 
+export const TOGGLE_MAP_FULLSCREEN = "TOGGLE_MAP_FULLSCREEN";
+
 export const citySelected = (network) => ({ type: CITY_SELECTED, payload: network });
 export const stationsLoaded = (network) => ({ type: STATIONS_LOADED, payload: network });
+export const toggleMapFullscreen = () => ({ type: TOGGLE_MAP_FULLSCREEN });
 
 export const searchChange = (search) => ({ type: SEARCH_CHANGE, payload: search });
 export const suggestionsChange = (suggestions) => ({ type: SUGGESTIONS_CHANGE, payload: suggestions });

@@ -1,10 +1,12 @@
 import { CITY_SELECTED, SEARCH_CHANGE, STATIONS_LOADED, SUGGESTIONS_CHANGE } from "../epics/index";
 import { SEARCH_LOCK } from "../../commons/epics/index";
+import { TOGGLE_MAP_FULLSCREEN } from "../epics";
 
 export default function homeReducer(state = {
   selectedProvider: null,
   network: null,
   search: '',
+  fullscreenMap: null,
   searchLock: false,
   suggestions: []
 }, { type, payload }) {
@@ -23,6 +25,9 @@ export default function homeReducer(state = {
 
     case SUGGESTIONS_CHANGE:
       return { ...state, suggestions: payload };
+
+    case TOGGLE_MAP_FULLSCREEN:
+      return { ...state, fullscreenMap: !state.fullscreenMap };
   }
 
   return state;
