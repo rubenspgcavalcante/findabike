@@ -25,16 +25,6 @@ const App = () =>
       <Modal/>
       <div className="section">
         <Home/>
-        <footer>
-          <div className="box is-small">
-            <span>Powered by:</span>
-            <div className='credits-box'>
-              <a href="https://www.openstreetmap.org" target='_blank' rel="noopener">Open Street Map</a>&
-              <a href="https://api.citybik.es/v2/" target='_blank' rel="noopener">CityBikes</a>&
-              <a href="https://surge.sh/" target='_blank' rel="noopener">Surge</a>
-            </div>
-          </div>
-        </footer>
       </div>
     </main>
   </Router>;

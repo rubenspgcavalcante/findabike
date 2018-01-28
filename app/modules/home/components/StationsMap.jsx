@@ -9,6 +9,7 @@ import user from "assets/map/map-marker-with-a-person-shape.png";
 import { googleDirections, openStreetMapsLayer } from "modules/commons/utils/APIs";
 import CustomControl from "modules/commons/components/map/CustomControl";
 import { exitFullscreen, launchFullscreen } from "../../commons/utils/fullscreen";
+import { THEME_COLOR } from "../../commons/utils/theme.constants";
 
 const stationIcon = icon({
   iconUrl: station,
@@ -93,7 +94,7 @@ export default class StationsMap extends Component {
           {location ? <Marker position={userLatLng} icon={userIcon}/> : null}
 
           {network.stations ?
-            <MarkerCluster>
+            <MarkerCluster options={{ polygonOptions: { color: THEME_COLOR } }}>
               {network.stations.map((station, idx) =>
                 <Marker key={idx} position={latLng(station.latitude, station.longitude)} icon={stationIcon}>
                   <Popup>

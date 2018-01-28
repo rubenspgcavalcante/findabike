@@ -5,7 +5,7 @@ import StationsMap from "../containers/StationsMap";
 export default class Home extends Component {
   render() {
     const {
-      networks = [], search, searchLock, suggestions, citySelected, searchChange, suggestionsChange
+      networks = [], search, searchLock, suggestions, citySelected, searchChange, suggestionsChange, showCredits
     } = this.props;
 
     const places = networks.map(({ id, company, location }) => ({
@@ -21,6 +21,8 @@ export default class Home extends Component {
         <div>
           <div className="search-box">
             <h1 className="title">Find a Bike</h1>
+            <a href="#" role="button" className='show-credits' onClick={showCredits}>credits <i
+              className="fa fa-info-circle"/></a>
             <div className='field'>
               <Suggestion search={search} suggestions={suggestions} onChange={searchChange}
                           onSuggestionsChange={suggestionsChange}

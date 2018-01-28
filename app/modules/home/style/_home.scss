@@ -12,8 +12,15 @@
     padding: 2rem 3rem 1rem 0;
 
     .title {
+      display: inline;
       margin-left: 10%;
       margin-bottom: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .show-credits {
+      color: $theme-color;
+      font-size: 0.7rem;
     }
   }
 

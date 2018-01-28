@@ -29,14 +29,14 @@
     }
 
     &-small {
-      $small: lighten($theme-color, 40%);
+      $small: lighten($theme-color, 30%);
       background: rgba($small, 0.4);
       div {
         background: $small;
       }
     }
     &-medium {
-      $medium: lighten($theme-color, 20%);
+      $medium: lighten($theme-color, 15%);
       background: rgba($medium, 0.4);
       div {
         background: $medium;
