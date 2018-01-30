@@ -1,5 +1,8 @@
-#FaB: Find a Bike
-![logo](app/assets/icons/bike.192.png)
+# FaB: Find a Bike
+![logo](app/assets/icons/bike.144.png)
+
+## Live version
+[findabike.surge.sh](https://findabike.surge.sh)
 
 ## What is it?
 If you know your city have shareable bikes :bike:, but just can't find them, **FaB** is for you.
