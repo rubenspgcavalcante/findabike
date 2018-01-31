@@ -7,8 +7,8 @@ module.exports = {
   context: path.resolve(__dirname, 'app'),
   entry: ['./app.jsx'],
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].chunk.js',
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[hash].chunk.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: "/"
   },

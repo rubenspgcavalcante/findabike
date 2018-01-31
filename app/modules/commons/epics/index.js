@@ -11,6 +11,9 @@ import "rxjs/add/observable/dom/ajax";
 
 import { cbAPI, nomiAPI } from "../utils/APIs";
 import db from "../cache/db";
+import DBWorker from "workers/db.worker";
+
+const dbWorker = new DBWorker();
 
 export const LOADING = "LOADING";
 
@@ -72,7 +75,10 @@ export const updateLocationEpic = action$ =>
     .mergeMap(() =>
       locationWatcher$.mergeMap(
         ({ coords: { latitude, longitude } }) => Observable.of(locationUpdated({ latitude, longitude })))
-    );
+    ).catch(err => {
+    console.warn(err);
+    return Observable.empty();
+  });
 
 export const loadPlaceEpic = action$ =>
   action$.ofType(LOCATION_LOADED)
@@ -81,7 +87,10 @@ export const loadPlaceEpic = action$ =>
         url: nomiAPI(`reverse?format=json&lat=${payload.latitude}&lon=${payload.longitude}`),
         method: 'GET',
         responseType: 'json',
-        crossDomain: true
+        crossDomain: true,
+        headers: {
+          'Accept-Language': 'en-US'
+        }
       }).map(({ response, status }) => {
         if (status <= 400) {
           return placeLoaded(response);
@@ -90,7 +99,7 @@ export const loadPlaceEpic = action$ =>
           console.warn(`Couldn't load reversal geo location: Error ${status} - ${response}`);
           return searchLock(false);
         }
-      }).catch(err => searchLock(false))
+      }).catch(err => Observable.of(searchLock(false)))
     );
 
 export const loadNetworksEpic = action$ =>
@@ -105,8 +114,9 @@ export const loadNetworksEpic = action$ =>
           crossDomain: true
         }).map(({ response, status }) => {
             if (status <= 400) {
-              db.transaction('rw', db.networks, () => db.networks.bulkPut(response.networks));
-              return networksLoaded(response.networks);
+              const action = networksLoaded(response.networks);
+              dbWorker.postMessage(action);
+              return action;
             }
           }
         ).catch((err) =>

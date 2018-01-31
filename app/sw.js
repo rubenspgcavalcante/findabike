@@ -26,20 +26,15 @@ self.addEventListener('activate', ev =>
   ))
 );
 
-self.addEventListener('fetch', ev => {
-  ev.respondWith(
-    fetch(ev.request).catch(() =>
-      caches.match(ev.request).catch(unableToResolve)
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.open(CACHE_NAME).then(cache =>
+      cache.match(event.request).then(response =>
+        response || fetch(event.request).then(response => {
+          cache.put(event.request, response.clone());
+          return response;
+        })
+      )
     )
-  )
+  );
 });
-
-function unableToResolve() {
-  return new Response('<span>Service Unavailable</span>', {
-    status: 503,
-    statusText: 'Service Unavailable',
-    headers: new Headers({
-      'Content-Type': 'text/html'
-    })
-  })
-}
