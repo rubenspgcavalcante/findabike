@@ -31,44 +31,16 @@ const renderSuggestion = place => (
   </div>
 );
 
-const renderInput = ({ loading, ...inputProps }) =>
-  loading ? (
-    <div>
-      <input
-        className="input is-disabled"
-        aria-disabled="true"
-        type="text"
-        {...inputProps}
-        disabled={true}
-      />
-      <span className="icon is-small is-left">
-        <i className="fa fa-spinner fa-spin" />
-      </span>
-    </div>
-  ) : (
-    <div>
-      <input
-        className="input"
-        {...inputProps}
-        aria-disabled="false"
-        type="text"
-      />
-      <span className="icon is-small is-left">
-        <i className="fa fa-search" />
-      </span>
-    </div>
-  );
-
 export default class Suggestion extends Component {
-  onSuggestionsFetchRequested = ({ value }) => {
+  onSuggestionsFetchRequested({ value }) {
     const { places, onSuggestionsChange } = this.props;
     onSuggestionsChange(getSuggestions(places, value));
-  };
+  }
 
-  onSuggestionsClearRequested = () => {
+  onSuggestionsClearRequested() {
     const { onSuggestionsChange } = this.props;
     onSuggestionsChange([]);
-  };
+  }
 
   onSuggestionHighlighted({ suggestion }) {
     suggestion && this.props.onChange(suggestion.city);

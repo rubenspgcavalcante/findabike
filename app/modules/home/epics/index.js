@@ -17,6 +17,7 @@ import {
   searchLock
 } from "../../commons/epics/index";
 import { openModal } from "../../commons/epics/modal";
+import { dbWorker } from "../../../workers";
 
 export const CITY_SELECTED = "CITY_SELECTED";
 export const STATIONS_LOADED = "STATIONS_LOADED";
@@ -98,8 +99,9 @@ export const citySelectedEpic = action$ =>
     })
       .map(({ response, status }) => {
         if (status <= 400) {
-          db.networks.update({ id: action.payload.id }, response.network);
-          return stationsLoaded(response.network);
+          const action = stationsLoaded(response.network);
+          dbWorker.postMessage(action);
+          return action;
         }
       })
       .catch(err =>

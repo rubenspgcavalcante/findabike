@@ -11,9 +11,7 @@ import "rxjs/add/observable/dom/ajax";
 
 import { cbAPI, nomiAPI } from "../utils/APIs";
 import db from "../cache/db";
-import DBWorker from "workers/db.worker";
-
-const dbWorker = new DBWorker();
+import { dbWorker } from "../../../workers";
 
 export const LOADING = "LOADING";
 
@@ -51,12 +49,8 @@ export const setPersistentStorage = (enabled = false) => ({
 const locationWatcher$ = Observable.create(observer => {
   if ("geolocation" in navigator) {
     navigator.geolocation.watchPosition(
-      position => {
-        observer.next(position);
-      },
-      error => {
-        observer.error(error);
-      }
+      position => observer.next(position),
+      error => observer.error(error)
     );
   } else {
     observer.error({ message: "Geolocation API not available" });
