@@ -82,6 +82,7 @@ export default class Suggestion extends Component {
       value: search,
       loading,
       placeholder: "Choose your city",
+      "aria-label": "Choose your city",
       onChange: (ev, { newValue }) => onChange(newValue)
     };
 
@@ -92,8 +93,8 @@ export default class Suggestion extends Component {
           onSelection(suggestion)
         }
         suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
         onSuggestionHighlighted={this.onSuggestionHighlighted.bind(this)}
         getSuggestionValue={getSuggestionValue}
         renderSuggestionsContainer={renderSuggestionsContainer}
