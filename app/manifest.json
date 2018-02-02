@@ -3,6 +3,7 @@
   "short_name": "FaB",
   "start_url": ".",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#4b25c5",
   "theme_color": "#4b25c5",
   "description": "An app to find public shareable bikes",

@@ -2,7 +2,9 @@ import React from "react";
 
 const context = require.context("./modal-types", true, /.jsx$/);
 
-const modules = context.keys().reduce((acc, key) => ({ ...acc, [key]: context(key).default }), {});
+const modules = context
+  .keys()
+  .reduce((acc, key) => ({ ...acc, [key]: context(key).default }), {});
 
 export default ({ active, title, type, content }) => {
   if (!active) {
@@ -17,11 +19,11 @@ export default ({ active, title, type, content }) => {
   const ModalContent = modules[`./${type}.jsx`];
 
   return (
-    <div className='modal is-active'>
-      <div className="modal-background"/>
+    <div className="modal is-active">
+      <div className="modal-background" />
       <div className="modal-card">
-        <ModalContent title={title} content={content}/>
+        <ModalContent title={title} content={content} />
       </div>
     </div>
-  )
+  );
 };

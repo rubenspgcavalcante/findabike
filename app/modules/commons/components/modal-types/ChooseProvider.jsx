@@ -4,19 +4,19 @@ import { citySelected, searchChange } from "../../../home/epics";
 import { closeModal } from "../../epics/modal";
 import { searchLock } from "../../epics";
 
-const mapDispatchToProps = (dispatch) => ({
-  citySelected: (city) => dispatch(citySelected(city)),
+const mapDispatchToProps = dispatch => ({
+  citySelected: city => dispatch(citySelected(city)),
   closeModal: () => dispatch(closeModal()),
-  searchChange: (search) => dispatch(searchChange(search)),
-  searchLock: (lock) => dispatch(searchLock(lock))
+  searchChange: search => dispatch(searchChange(search)),
+  searchLock: lock => dispatch(searchLock(lock))
 });
 
 class ChooseProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chosenCity: null,
-    }
+      chosenCity: null
+    };
   }
 
   _select() {
@@ -41,24 +41,41 @@ class ChooseProvider extends Component {
       <div>
         <header className="modal-card-head">
           <h1 className="modal-card-title">{title}</h1>
-          <button className="delete" aria-label="close" onClick={this._close.bind(this)}/>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={this._close.bind(this)}
+          />
         </header>
         <section className="modal-card-body">
-          <div className='control'>
-            {content.map((network, idx) =>
-              <label className="radio is-block is-marginless"
-                     key={idx}><input type='radio' name='provider' value={network.id}
-                                      onClick={() => this.setState({ chosenCity: network })}/> {network.company[0]}
+          <div className="control">
+            {content.map((network, idx) => (
+              <label className="radio is-block is-marginless" key={idx}>
+                <input
+                  type="radio"
+                  name="provider"
+                  value={network.id}
+                  onClick={() => this.setState({ chosenCity: network })}
+                />{" "}
+                {network.company[0]}
               </label>
-            )}
+            ))}
           </div>
         </section>
         <footer className="modal-card-foot">
-          <button disabled={!chosenCity} className="button is-success" onClick={this._select.bind(this)}>Select</button>
-          <button className="button" onClick={this._close.bind(this)}>Cancel</button>
+          <button
+            disabled={!chosenCity}
+            className="button is-success"
+            onClick={this._select.bind(this)}
+          >
+            Select
+          </button>
+          <button className="button" onClick={this._close.bind(this)}>
+            Cancel
+          </button>
         </footer>
       </div>
-    )
+    );
   }
 }
 

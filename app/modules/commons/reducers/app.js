@@ -3,14 +3,17 @@ import modal from "./modal";
 import { CLOSE_MODAL, OPEN_MODAL } from "../epics/modal";
 import { LOADING, LOCATION_UPDATED } from "../epics";
 
-export default function appReducer(state = {
-  location: null,
-  mapCenter: null,
-  place: null,
-  loading: false,
-  networks: [],
-  modal: {},
-}, { type, payload }) {
+export default function appReducer(
+  state = {
+    location: null,
+    mapCenter: null,
+    place: null,
+    loading: false,
+    networks: [],
+    modal: {}
+  },
+  { type, payload }
+) {
   switch (type) {
     case LOADING:
       return { ...state, loading: payload };

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from 'react-router-dom';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+import { BrowserRouter as Router } from "react-router-dom";
+import runtime from "serviceworker-webpack-plugin/lib/runtime";
 
 import store from "./store";
 import "./app.scss";
@@ -12,26 +12,31 @@ import { appBootstrap } from "./modules/commons/epics";
 import Modal from "./modules/commons/containers/Modal";
 import LoadingBar from "./modules/commons/containers/LoadingBar";
 
-if ('serviceWorker' in navigator) {
+if ("serviceWorker" in navigator) {
   runtime.register();
 }
 
-document.addEventListener('DOMContentLoaded', () => store.dispatch(appBootstrap()), false);
+document.addEventListener(
+  "DOMContentLoaded",
+  () => store.dispatch(appBootstrap()),
+  false
+);
 
-const App = () =>
+const App = () => (
   <Router>
     <main id="react-app" className="container is-fluid">
-      <LoadingBar/>
-      <Modal/>
+      <LoadingBar />
+      <Modal />
       <div className="section">
-        <Home/>
+        <Home />
       </div>
     </main>
-  </Router>;
+  </Router>
+);
 
 render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>,
   document.getElementById("app")
 );
