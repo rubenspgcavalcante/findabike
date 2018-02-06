@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "format": "prettier --write './app/**/*.{js,jsx}'",
-    "build": "NODE_ENV=production webpack --progress",
+    "build": "rm -rf dist/ & NODE_ENV=production webpack --progress",
     "server": "NODE_ENV=development webpack-dev-server --content-base dist/ --hot --inline --compress --colors --history-api-fallback",
     "surge-publish": "surge ./dist/ https://findabike.surge.sh"
   },
@@ -37,6 +37,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-syntax-highlighter": "^6.1.1",
+    "react-world-flags": "^0.0.3",
     "redux": "^3.7.2",
     "redux-observable": "^0.17.0",
     "rx-dom": "^7.0.3",

@@ -15,12 +15,11 @@ export default class Home extends Component {
       showCredits
     } = this.props;
 
-    const places = networks.map(({ id, company, location }) => ({
+    const places = networks.map(({ id, name, location }) => ({
       id,
-      name,
+      project: name,
       city: location ? location.city : null,
-      country: location ? location.country : null,
-      company: company && company[0]
+      country: location ? location.country : null
     }));
 
     return (

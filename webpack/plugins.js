@@ -1,4 +1,4 @@
-const { ProvidePlugin, DefinePlugin } = require('webpack');
+const { DefinePlugin, optimize: { CommonsChunkPlugin } } = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -10,7 +10,6 @@ const { version } = require('../package.json');
 const { dev, test, prod, CURRENT } = require('./envs');
 const path = dev('/') || prod('/findabike/');
 
-
 module.exports = [
   new CopyWebpackPlugin([
       { from: 'manifest.json' },
@@ -20,7 +19,10 @@ module.exports = [
   new HtmlWebpackPlugin({
     title: 'Find a Bike',
     template: 'index.html'
-
+  }),
+  new CommonsChunkPlugin({
+    name: "vendor",
+    minChunks: ({ context }) => context && context.includes("node_modules")
   }),
   new ServiceWorkerWebpackPlugin({
     entry: 'sw.js',
@@ -30,13 +32,7 @@ module.exports = [
       return serviceWorkerOptions;
     }
   }),
-  new ProvidePlugin({
-    jQuery: 'jquery',
-    $: 'jquery',
-    jquery: 'jquery',
-    React: 'react'
-  }),
-  new ExtractTextPlugin('styles.[hash].css'),
+  new ExtractTextPlugin('[name].[hash].css'),
   new DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(CURRENT)

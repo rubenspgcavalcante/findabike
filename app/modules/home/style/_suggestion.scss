@@ -28,16 +28,30 @@
   }
 
   .suggestion {
-    padding: 1rem;
+    padding: 0.2rem 1rem;
+    display: flex;
+    align-content: space-between;
 
-    .company {
-      float: right;
-      font-size: 0.7rem;
-      margin-top: 0.3rem;
+    .city {
+      flex-grow: 1;
+      overflow: hidden;
+
+      .name, .project {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
+        width: 100%;
+      }
+
+      small {
+        font-size: 0.7rem;
+      }
     }
 
-    hr {
-      margin: 0.5rem 0;
+    [class^="flag-"] {
+      height: 1.5rem;
+      margin-top: 0.5rem;
     }
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Flag from "react-world-flags";
 import Autosuggest from "react-autosuggest";
 
 const getSuggestions = (places, value) => {
@@ -24,10 +25,15 @@ const renderSuggestionsContainer = ({ containerProps, children }) => {
   );
 };
 
-const renderSuggestion = place => (
+const renderSuggestion = ({ city, project, country }) => (
   <div className="suggestion">
-    {place.city} - {place.country}
-    <span className="company">({place.company})</span>
+    <div className="city">
+      <span className="name">{city}</span>
+      <span className="project">
+        <small>{project}</small>
+      </span>
+    </div>
+    {country ? <Flag className={`flag-${country}`} code={country} /> : null}
   </div>
 );
 
@@ -93,8 +99,12 @@ export default class Suggestion extends Component {
           onSelection(suggestion)
         }
         suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(
+          this
+        )}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(
+          this
+        )}
         onSuggestionHighlighted={this.onSuggestionHighlighted.bind(this)}
         getSuggestionValue={getSuggestionValue}
         renderSuggestionsContainer={renderSuggestionsContainer}
