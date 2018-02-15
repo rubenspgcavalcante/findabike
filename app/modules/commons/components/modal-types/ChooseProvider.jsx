@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {FormattedMessage} from "react-intl";
+
 import { citySelected, searchChange } from "../../../home/epics";
 import { closeModal } from "../../epics/modal";
 import { searchLock } from "../../epics";
@@ -38,9 +40,9 @@ class ChooseProvider extends Component {
     const { chosenCity } = this.state;
 
     return (
-      <div>
+      <div id="choose-provider">
         <header className="modal-card-head">
-          <h1 className="modal-card-title">{title}</h1>
+          <h1 className="modal-card-title"><FormattedMessage id="provider.chooseFrom" /> {title}</h1>
           <button
             className="delete"
             aria-label="close"
@@ -68,10 +70,10 @@ class ChooseProvider extends Component {
             className="button is-success"
             onClick={this._select.bind(this)}
           >
-            Select
+            <FormattedMessage id="ui.select" />
           </button>
           <button className="button" onClick={this._close.bind(this)}>
-            Cancel
+            <FormattedMessage id="ui.cancel" capitalize />
           </button>
         </footer>
       </div>

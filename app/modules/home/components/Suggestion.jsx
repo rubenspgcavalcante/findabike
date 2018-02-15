@@ -1,43 +1,14 @@
 import React, { Component } from "react";
-import Flag from "react-world-flags";
+import {injectIntl} from "react-intl";
 import Autosuggest from "react-autosuggest";
+import {
+  getSuggestions,
+  getSuggestionValue,
+  renderSuggestion,
+  renderSuggestionsContainer
+} from "../utils/suggestionHelpers";
 
-const getSuggestions = (places, value) => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-
-  return inputLength === 0
-    ? []
-    : places
-        .filter(
-          place => place.city.toLowerCase().slice(0, inputLength) === inputValue
-        )
-        .slice(0, 4);
-};
-
-const getSuggestionValue = suggestion => suggestion.name;
-
-const renderSuggestionsContainer = ({ containerProps, children }) => {
-  return (
-    <div className="suggestion-container" {...containerProps}>
-      {children ? <div className="box"> {children}</div> : null}
-    </div>
-  );
-};
-
-const renderSuggestion = ({ city, project, country }) => (
-  <div className="suggestion">
-    <div className="city">
-      <span className="name">{city}</span>
-      <span className="project">
-        <small>{project}</small>
-      </span>
-    </div>
-    {country ? <Flag className={`flag-${country}`} code={country} /> : null}
-  </div>
-);
-
-export default class Suggestion extends Component {
+class Suggestion extends Component {
   onSuggestionsFetchRequested({ value }) {
     const { places, onSuggestionsChange } = this.props;
     onSuggestionsChange(getSuggestions(places, value));
@@ -82,13 +53,14 @@ export default class Suggestion extends Component {
   }
 
   render() {
-    const { search, loading, suggestions, onSelection, onChange } = this.props;
+    const { search, loading, suggestions, onSelection, onChange, intl } = this.props;
+    const placeholder = intl.formatMessage({id: "home.search"});
 
     const inputProps = {
       value: search,
       loading,
-      placeholder: "Choose your city",
-      "aria-label": "Choose your city",
+      placeholder,
+      "aria-label": placeholder,
       onChange: (ev, { newValue }) => onChange(newValue)
     };
 
@@ -119,3 +91,5 @@ export default class Suggestion extends Component {
     );
   }
 }
+
+export default injectIntl(Suggestion);

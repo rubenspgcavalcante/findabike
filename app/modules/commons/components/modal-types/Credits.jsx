@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { closeModal } from "../../epics/modal";
+import {FormattedMessage} from "react-intl";
 
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal())
@@ -13,7 +14,7 @@ class Credits extends Component {
     return (
       <div>
         <header className="modal-card-head">
-          <h1 className="modal-card-title">Powered by:</h1>
+          <h1 className="modal-card-title"><FormattedMessage id="credits.title"/></h1>
           <button
             className="delete"
             aria-label="close"

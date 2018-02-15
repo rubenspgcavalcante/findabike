@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
 import Suggestion from "./Suggestion";
 import StationsMap from "../containers/StationsMap";
 
@@ -32,8 +33,7 @@ export default class Home extends Component {
               role="button"
               className="show-credits"
               onClick={showCredits}
-            >
-              credits <i className="fa fa-info-circle" />
+            ><FormattedMessage id="home.credits"/> <i className="fa fa-info-circle"/>
             </a>
             <div className="field">
               <Suggestion
@@ -48,10 +48,10 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="decoration-box box">
-            <div className="decoration" />
+            <div className="decoration"/>
           </div>
         </div>
-        <StationsMap />
+        <StationsMap/>
       </div>
     );
   }

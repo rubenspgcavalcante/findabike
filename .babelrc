@@ -7,6 +7,9 @@
     "transform-object-rest-spread",
     "transform-class-properties",
     "syntax-dynamic-import",
-    "transform-function-bind"
+    "transform-function-bind",
+    ["react-intl", {
+      "messagesDir": "./build/messages/"
+    }]
   ]
 }

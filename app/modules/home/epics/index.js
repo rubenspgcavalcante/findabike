@@ -77,7 +77,7 @@ export const autoSelectCityEpic = action$ =>
         } else if (matched.length > 1) {
           return Observable.of(
             openModal({
-              title: `Choose a provider in ${place.address.state}`,
+              title: place.address.state,
               type: "ChooseProvider",
               content: matched
             })
