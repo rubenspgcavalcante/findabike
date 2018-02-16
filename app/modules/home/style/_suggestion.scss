@@ -32,6 +32,11 @@
     display: flex;
     align-content: space-between;
 
+    &-container{
+      width: 96%;
+      margin: auto;
+    }
+
     .city {
       flex-grow: 1;
       overflow: hidden;

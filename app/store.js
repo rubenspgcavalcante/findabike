@@ -9,7 +9,8 @@ import {
   loadNetworksEpic,
   loadPlaceEpic,
   setPersistentStorageEpic,
-  updateLocationEpic
+  updateLocationEpic,
+  offlineWatcherEpic
 } from "./modules/commons/epics";
 
 const rootEpic = combineEpics(
@@ -19,7 +20,8 @@ const rootEpic = combineEpics(
   updateLocationEpic,
   loadPlaceEpic,
   citySelectedEpic,
-  autoSelectCityEpic
+  autoSelectCityEpic,
+  offlineWatcherEpic
 );
 
 export default createStore(

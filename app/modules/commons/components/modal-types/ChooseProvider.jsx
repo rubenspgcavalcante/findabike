@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {FormattedMessage} from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 import { citySelected, searchChange } from "../../../home/epics";
 import { closeModal } from "../../epics/modal";
@@ -42,7 +42,9 @@ class ChooseProvider extends Component {
     return (
       <div id="choose-provider">
         <header className="modal-card-head">
-          <h1 className="modal-card-title"><FormattedMessage id="provider.chooseFrom" /> {title}</h1>
+          <h1 className="modal-card-title">
+            <FormattedMessage id="provider.chooseFrom" /> {title}
+          </h1>
           <button
             className="delete"
             aria-label="close"

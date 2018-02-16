@@ -9,12 +9,16 @@ export default (() => {
   addLocaleData([...en, ...pt]);
 
   switch (language) {
-    case 'pt':
-    case 'pt-BR':
-      import("moment/locale/pt-br").then( () => moment.locale('pt-br'));
-      return () => import(/* webpackChunkName: "i18n.pt-BR" */'i18n/pt-BR').then(modResolver);
+    case "pt":
+    case "pt-BR":
+      import("moment/locale/pt-br").then(() => moment.locale("pt-br"));
+      return () =>
+        import(/* webpackChunkName: "i18n.pt-BR" */ "i18n/pt-BR").then(
+          modResolver
+        );
 
     default:
-      return () => import(/* webpackChunkName: "i18n.en" */ 'i18n/en').then(modResolver);
+      return () =>
+        import(/* webpackChunkName: "i18n.en" */ "i18n/en").then(modResolver);
   }
 })();

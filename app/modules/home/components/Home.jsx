@@ -9,9 +9,11 @@ export default class Home extends Component {
       networks = [],
       search,
       searchLock,
+      currentLatLng,
       suggestions,
       citySelected,
       searchChange,
+      locationRequest,
       suggestionsChange,
       showCredits
     } = this.props;
@@ -26,19 +28,23 @@ export default class Home extends Component {
     return (
       <div className="home">
         <div>
-          <div className="search-box">
-            <h1 className="title">Find a Bike</h1>
-            <a
-              href="#"
-              role="button"
-              className="show-credits"
-              onClick={showCredits}
-            ><FormattedMessage id="home.credits"/> <i className="fa fa-info-circle"/>
-            </a>
-            <div className="field">
+          <div className="search-container">
+            <div className="wrapper">
+              <h1 className="title">Find a Bike</h1>
+              <a
+                href="#"
+                role="button"
+                className="show-credits"
+                onClick={showCredits}
+              >
+                <FormattedMessage id="home.credits"/>{" "}
+                <i className="fa fa-info-circle"/>
+              </a>
               <Suggestion
                 search={search}
                 suggestions={suggestions}
+                showLocationReqBtn={!currentLatLng}
+                onLocationRequest={locationRequest}
                 onChange={searchChange}
                 onSuggestionsChange={suggestionsChange}
                 onSelection={selection => citySelected(selection)}

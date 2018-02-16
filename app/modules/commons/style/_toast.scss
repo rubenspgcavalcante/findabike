@@ -1,0 +1,10 @@
+@import "vars";
+
+.toast {
+  &.offline {
+    opacity: 0.7;
+    background-color: $theme-color !important;
+    color: #FFF !important;
+    text-align: center;
+  }
+}

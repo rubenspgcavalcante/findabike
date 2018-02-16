@@ -1,6 +1,7 @@
 export default {
   "ui.select": "select",
   "ui.cancel": "cancel",
+  "app.offline": "Offline Mode",
 
   "home.search": "Search your city",
   "home.credits": "Credits",

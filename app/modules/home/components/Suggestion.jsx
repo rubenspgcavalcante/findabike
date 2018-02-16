@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import {injectIntl} from "react-intl";
+import { injectIntl } from "react-intl";
+import classNames from "classnames";
 import Autosuggest from "react-autosuggest";
+
 import {
   getSuggestions,
   getSuggestionValue,
@@ -24,37 +26,51 @@ class Suggestion extends Component {
   }
 
   _renderInput({ loading, ...inputProps }) {
-    return loading ? (
-      <div>
-        <input
-          className="input is-disabled"
-          aria-disabled="true"
-          type="text"
-          {...inputProps}
-          disabled={true}
-        />
-        <span className="icon is-small is-left">
-          <i className="fa fa-spinner fa-spin" />
-        </span>
-      </div>
-    ) : (
-      <div>
-        <input
-          className="input"
-          {...inputProps}
-          aria-disabled="false"
-          type="text"
-        />
-        <span className="icon is-small is-left">
-          <i className="fa fa-search" />
-        </span>
+    const { showLocationReqBtn, onLocationRequest } = this.props;
+
+    const fieldClass = classNames("field", { "has-addons": showLocationReqBtn });
+    const controlClass = classNames("control", "is-expanded", {
+      "is-loading": loading
+    });
+    const inputClass = classNames("input", "is-rounded", { disabled: loading });
+
+    return (
+      <div className={fieldClass}>
+        <p className={controlClass}>
+          <input
+            className={inputClass}
+            aria-disabled={loading}
+            type="text"
+            {...inputProps}
+            disabled={loading}
+          />
+        </p>
+        {showLocationReqBtn ?
+          <p className="control">
+            <button
+              name="find-my-location"
+              disabled={loading}
+              className="button is-rounded"
+              onClick={() => onLocationRequest()}
+            >
+              <i className="fa fa-map-marker"/>
+            </button>
+          </p> : null
+        }
       </div>
     );
   }
 
   render() {
-    const { search, loading, suggestions, onSelection, onChange, intl } = this.props;
-    const placeholder = intl.formatMessage({id: "home.search"});
+    const {
+      search,
+      loading,
+      suggestions,
+      onSelection,
+      onChange,
+      intl
+    } = this.props;
+    const placeholder = intl.formatMessage({ id: "home.search" });
 
     const inputProps = {
       value: search,
@@ -83,10 +99,7 @@ class Suggestion extends Component {
         renderSuggestion={renderSuggestion}
         renderInputComponent={this._renderInput.bind(this)}
         inputProps={inputProps}
-        theme={{
-          container: "control has-icons-left",
-          suggestionHighlighted: "is-active"
-        }}
+        theme={{ suggestionHighlighted: "is-active" }}
       />
     );
   }

@@ -1,19 +1,26 @@
 @import "~modules/commons/style/_vars";
+@import "~bulma/sass/utilities/mixins";
 
 .home {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 
-  .search-box {
+  .search-container {
     position: absolute;
     z-index: $leaflet-z-index + 1;
+    padding: 2rem 5rem 0 3rem;
     width: 100%;
-    padding: 2rem 3rem 1rem 0;
+
+    .wrapper {
+      margin: auto;
+      @include desktop {
+        width: 80%;
+      }
+    }
 
     .title {
       display: inline;
-      margin-left: 10%;
       margin-bottom: 1rem;
       margin-right: 0.5rem;
     }
@@ -41,11 +48,9 @@
 
   }
 
-  .field .control {
-    width: 80%;
-    margin: auto;
-
-    input {
+  .field {
+    margin-bottom: 0;
+    .control input {
       z-index: 1;
     }
   }

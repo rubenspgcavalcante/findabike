@@ -1,7 +1,7 @@
 import { LOCATION_LOADED, NETWORKS_LOADED, PLACE_LOADED } from "../epics/index";
 import modal from "./modal";
 import { CLOSE_MODAL, OPEN_MODAL } from "../epics/modal";
-import { LOADING, LOCATION_UPDATED } from "../epics";
+import { LOADING, LOCATION_UPDATED, NETWORK_STATUS } from "../epics";
 
 export default function appReducer(
   state = {
@@ -9,6 +9,7 @@ export default function appReducer(
     mapCenter: null,
     place: null,
     loading: false,
+    offline: false,
     networks: [],
     modal: {}
   },
@@ -33,6 +34,9 @@ export default function appReducer(
     case OPEN_MODAL:
     case CLOSE_MODAL:
       return { ...state, modal: modal(state.modal, { type, payload }) };
+
+    case NETWORK_STATUS:
+      return {...state, offline: !payload}
   }
 
   return state;
