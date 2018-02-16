@@ -37,8 +37,8 @@ export default class Home extends Component {
                 className="show-credits"
                 onClick={showCredits}
               >
-                <FormattedMessage id="home.credits"/>{" "}
-                <i className="fa fa-info-circle"/>
+                <FormattedMessage id="home.credits" />{" "}
+                <i className="fa fa-info-circle" />
               </a>
               <Suggestion
                 search={search}
@@ -54,10 +54,10 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="decoration-box box">
-            <div className="decoration"/>
+            <div className="decoration" />
           </div>
         </div>
-        <StationsMap/>
+        <StationsMap />
       </div>
     );
   }

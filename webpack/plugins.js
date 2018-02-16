@@ -12,7 +12,8 @@ const path = dev('/') || prod('/findabike/');
 
 module.exports = [
   new CopyWebpackPlugin([
-      { from: 'manifest.json' },
+      { from: 'assets/manifest.json', flatten: false },
+      { from: 'assets/robots.txt', flatten: false },
       { from: 'assets/icons', flatten: false }
     ],
   ),

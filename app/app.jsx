@@ -36,11 +36,11 @@ const App = ({ i18n }) =>
     <IntlProvider locale={language} messages={i18n}>
       <Router onUpdate={() => ReactGA.pageview(window.location.hash)}>
         <main id="react-app" className="container is-fluid">
-          <Toast/>
-          <LoadingBar/>
-          <Modal/>
+          <Toast />
+          <LoadingBar />
+          <Modal />
           <div className="section">
-            <Home/>
+            <Home />
           </div>
         </main>
       </Router>
@@ -50,7 +50,7 @@ const App = ({ i18n }) =>
 i18nInjector().then(i18n =>
   render(
     <Provider store={store}>
-      <App i18n={i18n}/>
+      <App i18n={i18n} />
     </Provider>,
     document.getElementById("app")
   )

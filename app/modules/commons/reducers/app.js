@@ -36,7 +36,7 @@ export default function appReducer(
       return { ...state, modal: modal(state.modal, { type, payload }) };
 
     case NETWORK_STATUS:
-      return {...state, offline: !payload}
+      return { ...state, offline: !payload };
   }
 
   return state;

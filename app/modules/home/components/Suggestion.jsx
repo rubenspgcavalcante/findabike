@@ -28,7 +28,9 @@ class Suggestion extends Component {
   _renderInput({ loading, ...inputProps }) {
     const { showLocationReqBtn, onLocationRequest } = this.props;
 
-    const fieldClass = classNames("field", { "has-addons": showLocationReqBtn });
+    const fieldClass = classNames("field", {
+      "has-addons": showLocationReqBtn
+    });
     const controlClass = classNames("control", "is-expanded", {
       "is-loading": loading
     });
@@ -45,7 +47,7 @@ class Suggestion extends Component {
             disabled={loading}
           />
         </p>
-        {showLocationReqBtn ?
+        {showLocationReqBtn ? (
           <p className="control">
             <button
               name="find-my-location"
@@ -53,10 +55,10 @@ class Suggestion extends Component {
               className="button is-rounded"
               onClick={() => onLocationRequest()}
             >
-              <i className="fa fa-map-marker"/>
+              <i className="fa fa-map-marker" />
             </button>
-          </p> : null
-        }
+          </p>
+        ) : null}
       </div>
     );
   }

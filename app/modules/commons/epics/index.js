@@ -31,7 +31,10 @@ export const SEARCH_LOCK = "SEARCH_LOCK";
 export const PERSISTENT_STORAGE = "PERSISTENT_STORAGE";
 
 export const loading = (show = true) => ({ type: LOADING, payload: show });
-export const updateNetworkStatus = (status) => ({ type: NETWORK_STATUS, payload: status });
+export const updateNetworkStatus = status => ({
+  type: NETWORK_STATUS,
+  payload: status
+});
 
 export const appBootstrap = () => ({ type: APP_BOOTSTRAP });
 export const networksLoaded = payload => ({ type: NETWORKS_LOADED, payload });
@@ -158,14 +161,12 @@ export const loadNetworksEpic = action$ =>
   );
 
 export const setPersistentStorageEpic = action$ =>
-  action$
-    .ofType(APP_BOOTSTRAP)
-    .mergeMap(action => {
-      if (navigator.storage && navigator.storage.persist)
-        return Observable.fromPromise(
-          navigator.storage.persist().then(setPersistentStorage)
-        );
-    });
+  action$.ofType(APP_BOOTSTRAP).mergeMap(action => {
+    if (navigator.storage && navigator.storage.persist)
+      return Observable.fromPromise(
+        navigator.storage.persist().then(setPersistentStorage)
+      );
+  });
 
 export const offlineWatcherEpic = action$ =>
   action$
