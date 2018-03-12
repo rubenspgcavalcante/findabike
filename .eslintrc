@@ -6,7 +6,8 @@
     "serviceworker": true
   },
   "globals": {
-    "APP": true
+    "APP": true,
+    "ga": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
