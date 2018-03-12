@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const { version } = require('../package.json');
+const { getLastCommitHash } = require("./utils");
 
 const { dev, test, prod, CURRENT } = require('./envs');
 const path = dev('/') || prod('/findabike/');
@@ -35,6 +36,7 @@ module.exports = [
   }),
   new ExtractTextPlugin('[name].[hash].css'),
   new DefinePlugin({
+    'APP.release': JSON.stringify(getLastCommitHash()),
     'process.env': {
       NODE_ENV: JSON.stringify(CURRENT)
     },

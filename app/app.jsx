@@ -3,9 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { IntlProvider } from "react-intl";
-import { ToastContainer } from "react-toastify";
-import ReactGA from "react-ga";
-
+import Raven from "raven-js";
 import runtime from "serviceworker-webpack-plugin/lib/runtime";
 
 import store from "./store";
@@ -19,10 +17,15 @@ import { language } from "./modules/commons/utils/locale";
 import i18nInjector from "./modules/commons/utils/i18nInjector";
 import Toast from "./modules/commons/containers/Toast";
 
-ReactGA.initialize("UA-99305630-2");
-
 if ("serviceWorker" in navigator) {
   runtime.register();
+}
+
+if (process.env.NODE_ENV === 'development') {
+  Raven.config(
+    'https://652d4016524743bfb12e716cb585a246@sentry.io/301548',
+    { release: APP.release }
+  ).install();
 }
 
 document.addEventListener(
@@ -34,13 +37,13 @@ document.addEventListener(
 const App = ({ i18n }) =>
   i18n ? (
     <IntlProvider locale={language} messages={i18n}>
-      <Router onUpdate={() => ReactGA.pageview(window.location.hash)}>
+      <Router onUpdate={() => ReactGA.pageview(window.location.pathname + window.location.search)}>
         <main id="react-app" className="container is-fluid">
-          <Toast />
-          <LoadingBar />
-          <Modal />
+          <Toast/>
+          <LoadingBar/>
+          <Modal/>
           <div className="section">
-            <Home />
+            <Home/>
           </div>
         </main>
       </Router>
@@ -50,7 +53,7 @@ const App = ({ i18n }) =>
 i18nInjector().then(i18n =>
   render(
     <Provider store={store}>
-      <App i18n={i18n} />
+      <App i18n={i18n}/>
     </Provider>,
     document.getElementById("app")
   )

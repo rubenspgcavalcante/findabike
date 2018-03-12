@@ -1,3 +1,4 @@
+import Raven from "raven-js";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/map";
@@ -84,7 +85,7 @@ export const loadLocationEpic = action$ =>
           Observable.of(locationLoaded({ latitude, longitude }))
         )
         .catch(err => {
-          console.warn(err);
+          Raven.captureException(err);
           return Observable.of(searchLock(false));
         })
     )
@@ -99,7 +100,7 @@ export const updateLocationEpic = action$ =>
       )
     )
     .catch(err => {
-      console.warn(err);
+      Raven.captureException(err);
       return Observable.empty();
     });
 
@@ -120,13 +121,14 @@ export const loadPlaceEpic = action$ =>
         if (status <= 400) {
           return placeLoaded(response);
         } else {
-          console.warn(
-            `Couldn't load reversal geo location: Error ${status} - ${response}`
-          );
+          Raven.captureException(`Couldn't load reversal geo location: Error ${status} - ${response}`);
           return searchLock(false);
         }
       })
-      .catch(err => Observable.of(searchLock(false)))
+      .catch(err => {
+        Raven.captureException(err);
+        return Observable.of(searchLock(false));
+      })
   );
 
 export const loadNetworksEpic = action$ =>
@@ -146,10 +148,12 @@ export const loadNetworksEpic = action$ =>
             return action;
           }
         })
-        .catch(err =>
-          Observable.fromPromise(
-            db.networks.toArray().then(networks => networksLoaded(networks))
-          )
+        .catch(err => {
+            Raven.captureException(err);
+            return Observable.fromPromise(
+              db.networks.toArray().then(networks => networksLoaded(networks))
+            )
+          }
         )
         .mergeMap(resolvingAction =>
           Observable.merge(

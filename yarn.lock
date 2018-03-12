@@ -4696,6 +4696,10 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
+raven-js@^3.23.1:
+  version "3.23.1"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.23.1.tgz#34a5d7b5b3dd626a3d59e7a264e1d19a4c799cdb"
+
 raw-loader@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
@@ -4746,13 +4750,6 @@ react-dom@^16.2.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-react-ga@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.4.1.tgz#dfbd5f028ed39a07067f7a8bf57dc0d240000767"
-  optionalDependencies:
-    prop-types "^15.6.0"
-    react "^15.6.2 || ^16.0"
 
 react-intl@^2.4.0:
   version "2.4.0"
@@ -4876,7 +4873,7 @@ react-world-flags@^0.0.3:
     svg-country-flags "^1.0.0"
     world-countries "^1.8.1"
 
-"react@^15.6.2 || ^16.0", react@^16.2.0:
+react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:

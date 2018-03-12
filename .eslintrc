@@ -5,6 +5,9 @@
     "browser": true,
     "serviceworker": true
   },
+  "globals": {
+    "APP": true
+  },
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",

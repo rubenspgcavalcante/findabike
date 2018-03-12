@@ -1,0 +1,5 @@
+const childProcess = require("child_process");
+
+module.exports = {
+  getLastCommitHash: () => childProcess.execSync('git rev-parse HEAD').toString().trim()
+};
