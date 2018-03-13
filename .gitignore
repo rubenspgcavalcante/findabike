@@ -1,6 +1,7 @@
 dist/
 karma/
 .idea
+stats.json
 .DS_Store
 
 # Logs

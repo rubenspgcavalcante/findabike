@@ -21,7 +21,7 @@ if ("serviceWorker" in navigator) {
   runtime.register();
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
   Raven.config(
     'https://652d4016524743bfb12e716cb585a246@sentry.io/301548',
     { release: APP.release }

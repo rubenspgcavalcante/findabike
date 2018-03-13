@@ -1,7 +1,9 @@
 $fa-font-path: "~font-awesome/fonts";
+$flag-icon-css-path: "~flag-icon-css/flags";
 
 @import "~font-awesome/scss/font-awesome";
 @import "~bulma/bulma.sass";
+@import "~flag-icon-css/sass/flag-icon";
 @import url("~leaflet/dist/leaflet.css");
 @import url("~react-leaflet-markercluster/dist/styles.min.css");
 @import "modules/commons/style/index";
