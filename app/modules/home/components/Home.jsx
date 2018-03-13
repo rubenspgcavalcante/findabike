@@ -3,6 +3,9 @@ import { FormattedMessage } from "react-intl";
 import Suggestion from "./Suggestion";
 import StationsMap from "../containers/StationsMap";
 
+import mosaicPng from "assets/mosaic.png";
+import mosaicWebp from "assets/mosaic.webp";
+
 export default class Home extends Component {
   render() {
     const {
@@ -54,7 +57,10 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="decoration-box box">
-            <div className="decoration" />
+            <picture className="decoration">
+              <source srcSet={mosaicWebp} type="image/webp" />
+              <img src={mosaicPng} alt="decoration" />
+            </picture>
           </div>
         </div>
         <StationsMap />

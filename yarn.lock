@@ -1761,6 +1761,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+date-fns@^1.29.0:
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
+
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -5093,13 +5097,6 @@ react-transition-group@^2.2.1:
     prop-types "^15.5.8"
     warning "^3.0.0"
 
-react-world-flags@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-world-flags/-/react-world-flags-0.0.3.tgz#cb5c834fca5b0957c4e5d4c2ea1f3916e47b6e0b"
-  dependencies:
-    svg-country-flags "^1.0.0"
-    world-countries "^1.8.1"
-
 react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
@@ -6021,10 +6018,6 @@ surge@^0.19.0:
     tar.gz "0.1.1"
     url-parse-as-address "1.0.0"
 
-svg-country-flags@^1.0.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/svg-country-flags/-/svg-country-flags-1.2.1.tgz#a9d995bb66771304e45a4d51b325b55cdeed919e"
-
 svgo@^0.7.0:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
@@ -6609,10 +6602,6 @@ worker-loader@^1.1.0:
   dependencies:
     loader-utils "^1.0.0"
     schema-utils "^0.3.0"
-
-world-countries@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/world-countries/-/world-countries-1.8.1.tgz#14ba7d735d422d63de70deb6e35ec5e49341b209"
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

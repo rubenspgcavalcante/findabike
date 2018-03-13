@@ -12,7 +12,11 @@ import "rxjs/add/observable/dom/ajax";
 
 import { cbAPI } from "../../commons/utils/APIs";
 import db from "../../commons/cache/db";
-import { NETWORKS_LOADED, PLACE_LOADED, searchLock } from "../../commons/epics/index";
+import {
+  NETWORKS_LOADED,
+  PLACE_LOADED,
+  searchLock
+} from "../../commons/epics/index";
 import { openModal } from "../../commons/epics/modal";
 import { dbWorker } from "../../../workers";
 import { actionTrackerCreator } from "../../commons/utils/analytics";
@@ -90,7 +94,8 @@ export const autoSelectCityEpic = action$ =>
     });
 
 export const citySelectedEpic = action$ =>
-  action$.ofType(CITY_SELECTED)
+  action$
+    .ofType(CITY_SELECTED)
     .do(({ type, payload }) => trackSearch(type, payload.city))
     .mergeMap(action =>
       Observable.ajax({

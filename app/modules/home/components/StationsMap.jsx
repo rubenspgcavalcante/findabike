@@ -1,21 +1,16 @@
 import React, { Component } from "react";
-import moment from "moment";
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { icon, latLng } from "leaflet";
 import MarkerCluster from "react-leaflet-markercluster";
 
 import station from "assets/map/map-marker.png";
 import user from "assets/map/map-marker-with-a-person-shape.png";
-import {
-  googleDirections,
-  openStreetMapsLayer
-} from "modules/commons/utils/APIs";
+import { googleDirections, openStreetMapsLayer } from "modules/commons/utils/APIs";
 import CustomControl from "modules/commons/components/map/CustomControl";
-import {
-  exitFullscreen,
-  launchFullscreen
-} from "../../commons/utils/fullscreen";
+import { exitFullscreen, launchFullscreen } from "../../commons/utils/fullscreen";
 import { THEME_COLOR } from "../../commons/utils/theme.constants";
+import { dateLocale } from "../../commons/utils/locale";
 
 const stationIcon = icon({
   iconUrl: station,
@@ -31,13 +26,11 @@ const userIcon = icon({
   popupAnchor: [0, -30]
 });
 
-const cap = string => string.charAt(0).toUpperCase() + string.slice(1);
-
 export default class StationsMap extends Component {
   _buildPopup(station, intl) {
     const copy = {
       ...station,
-      lastCheck: cap(moment(station.timeStamp).fromNow())
+      lastCheck: distanceInWordsToNow(station.timestamp, { locale: dateLocale })
     };
 
     const entries = ["name", "status", "free_bikes", "lastCheck"].map(key => ({
@@ -65,12 +58,12 @@ export default class StationsMap extends Component {
             href={googleDirections(
               `?api=1&travelmode=walking&destination=${station.latitude},${
                 station.longitude
-              }`
+                }`
             )}
           >
             {" "}
             {intl.formatMessage({ id: "map.station.getDirections" })}{" "}
-            <i className="fa fa-external-link is-small" />
+            <i className="fa fa-external-link is-small"/>
           </a>
         </span>
       </div>
@@ -105,8 +98,8 @@ export default class StationsMap extends Component {
 
     const bounds = network.stations
       ? network.stations.map(({ latitude, longitude }) =>
-          latLng(latitude, longitude)
-        )
+        latLng(latitude, longitude)
+      )
       : null;
 
     const centerLatLng = mapCenter
@@ -139,7 +132,7 @@ export default class StationsMap extends Component {
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url={openStreetMapsLayer}
           />
-          {location ? <Marker position={userLatLng} icon={userIcon} /> : null}
+          {location ? <Marker position={userLatLng} icon={userIcon}/> : null}
 
           {network.stations ? (
             <MarkerCluster options={{ polygonOptions: { color: THEME_COLOR } }}>

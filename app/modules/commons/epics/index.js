@@ -121,7 +121,9 @@ export const loadPlaceEpic = action$ =>
         if (status <= 400) {
           return placeLoaded(response);
         } else {
-          Raven.captureException(`Couldn't load reversal geo location: Error ${status} - ${response}`);
+          Raven.captureException(
+            `Couldn't load reversal geo location: Error ${status} - ${response}`
+          );
           return searchLock(false);
         }
       })
@@ -149,12 +151,11 @@ export const loadNetworksEpic = action$ =>
           }
         })
         .catch(err => {
-            Raven.captureException(err);
-            return Observable.fromPromise(
-              db.networks.toArray().then(networks => networksLoaded(networks))
-            )
-          }
-        )
+          Raven.captureException(err);
+          return Observable.fromPromise(
+            db.networks.toArray().then(networks => networksLoaded(networks))
+          );
+        })
         .mergeMap(resolvingAction =>
           Observable.merge(
             Observable.of(resolvingAction),

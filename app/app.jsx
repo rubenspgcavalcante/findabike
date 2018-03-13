@@ -21,11 +21,10 @@ if ("serviceWorker" in navigator) {
   runtime.register();
 }
 
-if (process.env.NODE_ENV === 'production') {
-  Raven.config(
-    'https://652d4016524743bfb12e716cb585a246@sentry.io/301548',
-    { release: APP.release }
-  ).install();
+if (process.env.NODE_ENV === "production") {
+  Raven.config("https://652d4016524743bfb12e716cb585a246@sentry.io/301548", {
+    release: APP.release
+  }).install();
 }
 
 document.addEventListener(
@@ -37,13 +36,17 @@ document.addEventListener(
 const App = ({ i18n }) =>
   i18n ? (
     <IntlProvider locale={language} messages={i18n}>
-      <Router onUpdate={() => ReactGA.pageview(window.location.pathname + window.location.search)}>
+      <Router
+        onUpdate={() =>
+          ReactGA.pageview(window.location.pathname + window.location.search)
+        }
+      >
         <main id="react-app" className="container is-fluid">
-          <Toast/>
-          <LoadingBar/>
-          <Modal/>
+          <Toast />
+          <LoadingBar />
+          <Modal />
           <div className="section">
-            <Home/>
+            <Home />
           </div>
         </main>
       </Router>
@@ -53,7 +56,7 @@ const App = ({ i18n }) =>
 i18nInjector().then(i18n =>
   render(
     <Provider store={store}>
-      <App i18n={i18n}/>
+      <App i18n={i18n} />
     </Provider>,
     document.getElementById("app")
   )

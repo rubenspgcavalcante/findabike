@@ -50,7 +50,7 @@ module.exports = {
 
     },
     {
-      test: /\.ico$/,
+      test: /\.(webp|ico)$/,
       use: { loader: 'file-loader' }
     },
     {

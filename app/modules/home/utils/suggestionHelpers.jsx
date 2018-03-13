@@ -7,10 +7,10 @@ export const getSuggestions = (places, value) => {
   return inputLength === 0
     ? []
     : places
-      .filter(
-        place => place.city.toLowerCase().slice(0, inputLength) === inputValue
-      )
-      .slice(0, 4);
+        .filter(
+          place => place.city.toLowerCase().slice(0, inputLength) === inputValue
+        )
+        .slice(0, 4);
 };
 
 export const getSuggestionValue = suggestion => suggestion.name;
@@ -31,6 +31,8 @@ export const renderSuggestion = ({ city, project, country }) => (
         <small>{project}</small>
       </span>
     </div>
-    {country ? <span className={`flag-icon flag-icon-${country.toLowerCase()}`}/> : null}
+    {country ? (
+      <span className={`flag-icon flag-icon-${country.toLowerCase()}`} />
+    ) : null}
   </div>
 );
