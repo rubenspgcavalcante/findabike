@@ -31,6 +31,8 @@ export const SEARCH_LOCK = "SEARCH_LOCK";
 
 export const PERSISTENT_STORAGE = "PERSISTENT_STORAGE";
 
+export const NOT_CACHED_ERROR = "NOT_CACHED_ERROR";
+
 export const loading = (show = true) => ({ type: LOADING, payload: show });
 export const updateNetworkStatus = status => ({
   type: NETWORK_STATUS,

@@ -1,3 +1,5 @@
+import Raven from "raven-js";
+
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/mergeMap";
 import "rxjs/add/operator/map";
@@ -20,6 +22,7 @@ import {
 import { openModal } from "../../commons/epics/modal";
 import { dbWorker } from "../../../workers";
 import { actionTrackerCreator } from "../../commons/utils/analytics";
+import { NOT_CACHED_ERROR } from "../../commons/epics";
 
 export const CITY_SELECTED = "CITY_SELECTED";
 export const STATIONS_LOADED = "STATIONS_LOADED";
@@ -111,19 +114,19 @@ export const citySelectedEpic = action$ =>
             return action;
           }
         })
-        .catch(err =>
-          Observable.fromPromise(
+        .catch(err => {
+          Raven.captureException(err);
+          return Observable.fromPromise(
             db.networks
               .where("id")
               .equals(action.payload.id)
               .first()
-              .then(network => {
-                if (network.stations) {
-                  stationsLoaded(network);
-                } else {
-                  //TODO: Warn about offline mode
-                }
-              })
-          )
-        )
+              .then(
+                network =>
+                  network.stations
+                    ? stationsLoaded(network)
+                    : { type: NOT_CACHED_ERROR, payload: network }
+              )
+          );
+        })
     );
