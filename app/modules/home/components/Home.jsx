@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import Suggestion from "./Suggestion";
-import StationsMap from "../containers/StationsMap";
 
 import mosaicPng from "assets/mosaic.png";
 import mosaicWebp from "assets/mosaic.webp";
+import AsyncComponent from "modules/commons/components/AsyncComponent";
 
 export default class Home extends Component {
   render() {
     const {
       networks = [],
+      network,
       search,
       searchLock,
       currentLatLng,
@@ -59,11 +60,19 @@ export default class Home extends Component {
           <div className="decoration-box box">
             <picture className="decoration">
               <source srcSet={mosaicWebp} type="image/webp" />
-              <img src={mosaicPng} alt="decoration" />
+              <img src={mosaicPng} alt="mosaic" />
             </picture>
           </div>
         </div>
-        <StationsMap />
+        {network ? (
+          <AsyncComponent
+            importer={() =>
+              import(/* webpackMode: "lazy" */
+              /* webpackChunkName: "StationsMap" */
+              "../containers/StationsMap")
+            }
+          />
+        ) : null}
       </div>
     );
   }

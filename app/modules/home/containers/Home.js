@@ -6,13 +6,14 @@ import { locationRequest } from "../../commons/epics";
 
 const mapStateToProps = ({
   app: { networks, place, location },
-  home: { search, suggestions, searchLock }
+  home: { search, suggestions, searchLock, network }
 }) => ({
   place,
   search,
   suggestions,
   searchLock,
   networks,
+  network,
   currentLatLng: location
 });
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import Raven from "raven-js";
 import runtime from "serviceworker-webpack-plugin/lib/runtime";
@@ -36,20 +35,14 @@ document.addEventListener(
 const App = ({ i18n }) =>
   i18n ? (
     <IntlProvider locale={language} messages={i18n}>
-      <Router
-        onUpdate={() =>
-          ReactGA.pageview(window.location.pathname + window.location.search)
-        }
-      >
-        <main id="react-app" className="container is-fluid">
-          <Toast />
-          <LoadingBar />
-          <Modal />
-          <div className="section">
-            <Home />
-          </div>
-        </main>
-      </Router>
+      <main id="react-app" className="container is-fluid">
+        <Toast />
+        <LoadingBar />
+        <Modal />
+        <div className="section">
+          <Home />
+        </div>
+      </main>
     </IntlProvider>
   ) : null;
 
