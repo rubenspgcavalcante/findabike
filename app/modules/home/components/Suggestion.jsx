@@ -75,7 +75,7 @@ class Suggestion extends Component {
     const placeholder = intl.formatMessage({ id: "home.search" });
 
     const inputProps = {
-      value: search,
+      value: search || "",
       loading,
       placeholder,
       "aria-label": placeholder,
