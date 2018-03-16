@@ -28,11 +28,20 @@ module.exports = {
       }
     },
     {
+      test: /\.lazy\.scss$/,
+      use: [
+        { loader: "style-loader" },
+        { loader: "css-loader" },
+        { loader: "sass-loader" }
+      ]
+    },
+    {
       test: /\.scss|sass$/,
+      exclude: /\.lazy\.scss$/,
       use: ExtractTextPlugin.extract({
         fallback: "style-loader",
         use: [
-          { loader: "css-loader"},
+          { loader: "css-loader" },
           { loader: "sass-loader" }
         ]
       })

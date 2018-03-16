@@ -51,6 +51,7 @@ class Suggestion extends Component {
           <p className="control">
             <button
               name="find-my-location"
+              aria-label="Find my location"
               disabled={loading}
               className="button is-rounded"
               onClick={() => onLocationRequest()}

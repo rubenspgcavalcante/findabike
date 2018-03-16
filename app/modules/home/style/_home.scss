@@ -28,6 +28,11 @@
     .show-credits {
       color: $theme-color;
       font-size: 0.7rem;
+      white-space: nowrap;
+
+      @include mobile {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -37,14 +42,25 @@
     overflow: hidden;
 
     .decoration {
-      transform: rotate(-34deg);
-      height: 20rem;
-      width: 20rem;
-      left: 80%;
       position: absolute;
-      bottom: -25%;
-    }
+      transform: rotate(65deg);
+      top: -90%;
+      right: -4rem;
 
+      @include tablet {
+        right: -8rem;
+      }
+
+      @include mobile {
+        right: -15rem;
+      }
+
+      picture {
+        width: 100%;
+        height: 100%;
+        transform: rotate(55deg);
+      }
+    }
   }
 
   .field {

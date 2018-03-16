@@ -60,7 +60,7 @@ class ChooseProvider extends Component {
                   name="provider"
                   value={network.id}
                   onClick={() => this.setState({ chosenCity: network })}
-                />{" "}
+                />
                 {network.company[0]}
               </label>
             ))}

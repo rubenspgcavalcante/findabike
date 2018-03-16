@@ -67,8 +67,7 @@ export default class StationsMap extends Component {
               }`
             )}
           >
-            {" "}
-            {intl.formatMessage({ id: "map.station.getDirections" })}{" "}
+            {intl.formatMessage({ id: "map.station.getDirections" })}
             <i className="fa fa-external-link is-small" />
           </a>
         </span>

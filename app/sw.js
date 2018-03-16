@@ -62,7 +62,7 @@ function cacheFirst(cache, request) {
 }
 
 function shouldNetworkFirst(url) {
-  return [, new RegExp(global.location.origin + "/"), /manifest\.json/].some(
+  return [new RegExp(global.location.origin + "/"), /manifest\.json/].some(
     path => path.test(url)
   );
 }

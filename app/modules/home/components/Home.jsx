@@ -58,10 +58,12 @@ export default class Home extends Component {
             </div>
           </div>
           <div className="decoration-box box">
-            <picture className="decoration">
-              <source srcSet={mosaicWebp} type="image/webp" />
-              <img src={mosaicPng} alt="mosaic" />
-            </picture>
+            <div className="decoration">
+              <picture>
+                <source srcSet={mosaicWebp} type="image/webp" />
+                <img src={mosaicPng} alt="mosaic" />
+              </picture>
+            </div>
           </div>
         </div>
         {network ? (

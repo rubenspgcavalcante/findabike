@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import { object } from "prop-types";
+import { func } from "prop-types";
 
 export default class AsyncComponent extends PureComponent {
   static propTypes = {
-    importer: object.isRequired
+    importer: func.isRequired
   };
 
   state = { ready: false, Component: null };
