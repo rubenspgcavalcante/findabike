@@ -16,5 +16,7 @@ export default {
   "map.station.status.closed": "Closed",
   "map.station.free_bikes": "Free Bikes",
   "map.station.lastCheck": "Last check",
-  "map.station.getDirections": "Get directions"
+  "map.station.getDirections": "Get directions",
+
+  "error.position.denied": "Can't show your current position."
 };

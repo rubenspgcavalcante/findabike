@@ -16,5 +16,7 @@ export default {
   "map.station.status.closed": "Fechado",
   "map.station.free_bikes": "Bicicletas livres",
   "map.station.lastCheck": "Ultima atualização",
-  "map.station.getDirections": "Ver como chegar"
+  "map.station.getDirections": "Ver como chegar",
+
+  "error.position.denied": "Não foi possível exibir localização atual."
 };

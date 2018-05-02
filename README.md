@@ -1,5 +1,7 @@
 # FaB: Find a Bike
-![logo](app/assets/icons/bike.144.png)
+![logo](.github/logo.png | width=128)  
+![pwa](.github/pwa.svg | width=128)
+
 
 ## Live version
 [findabike.surge.sh](https://findabike.surge.sh)

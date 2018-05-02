@@ -10,31 +10,36 @@ const message = () => (
   </div>
 );
 
-export default class Toast extends PureComponent {
+export default class OfflineToast extends PureComponent {
   static propTypes = {
     offline: bool
   };
 
+  toastId = null;
+
   static _showMessage(offline) {
     const { BOTTOM_RIGHT } = toast.POSITION;
+    if (toast.isActive(this.toastId)) {
+      return;
+    }
 
     return offline
-      ? toast(message, {
+      ? (this.toastId = toast(message, {
           position: BOTTOM_RIGHT,
           closeButton: false,
           autoClose: false,
           closeOnClick: false,
           className: classNames("toast", { offline })
-        })
+        }))
       : toast.dismiss();
   }
 
   componentDidMount() {
-    Toast._showMessage(this.props.offline);
+    OfflineToast._showMessage(this.props.offline);
   }
 
   componentWillReceiveProps({ offline }) {
-    Toast._showMessage(offline);
+    OfflineToast._showMessage(offline);
   }
 
   render() {

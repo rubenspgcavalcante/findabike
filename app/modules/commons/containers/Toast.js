@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Toast from "../components/Toast";
+import Toast from "../components/OfflineToast";
 
 const mapStateToProps = ({ app: { offline } }) => ({ offline });
 

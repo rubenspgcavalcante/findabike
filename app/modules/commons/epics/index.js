@@ -14,6 +14,7 @@ import "rxjs/add/observable/dom/ajax";
 import { cbAPI, nomiAPI } from "../utils/APIs";
 import db from "../cache/db";
 import { dbWorker } from "../../../workers";
+import { cantShowPositionToast } from "../utils/toastFactory";
 
 export const LOADING = "LOADING";
 
@@ -88,6 +89,9 @@ export const loadLocationEpic = action$ =>
         )
         .catch(err => {
           Raven.captureException(err);
+          if (err.code === err.PERMISSION_DENIED) {
+            cantShowPositionToast();
+          }
           return Observable.of(searchLock(false));
         })
     )
