@@ -1,7 +1,9 @@
 # FaB: Find a Bike
-![logo](.github/logo.png | width=128)  
-![pwa](.github/pwa.svg | width=128)
+<img src=".github/logo.png" alt="logo" width="128"/>
+Find shared bikes turned easy!
 
+## This is a:
+<img src=".github/pwa.svg" alt="pwa" width="128"/>
 
 ## Live version
 [findabike.surge.sh](https://findabike.surge.sh)
